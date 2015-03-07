@@ -1,3 +1,58 @@
-<div>
-    Hello, {{ctrl.myName}}!
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-3">
+            Operations:
+            <form class="form-inline">
+                <div class="form-group">
+                    <h4>Add Event</h4>
+                    <label>Event X cord</label><input class="form-control" ng-model="ctrl.newEventData.x">
+                    <label>Event Y cord</label><input class="form-control" ng-model="ctrl.newEventData.y">
+                    <button ng-click="ctrl.addEvent()" class="btn btn-default">Add</button>
+                </div>
+            </form>
+
+            <form class="form-inline">
+                <div class="form-group">
+                    <h4>Remove Event</h4>
+                    <label>Event</label> <select class="form-control"
+                                   ng-options="event.name for event in ctrl.events"
+                                   ng-model="ctrl.eventToRemove"></select>
+                    <button ng-click="ctrl.removeEvent()" class="btn btn-default">Remove</button>
+                </div>
+            </form>
+
+            <form class="form-inline">
+                <div class="form-group">
+                    <h4>Add Dependency</h4>
+                    <label>From</label><select class="form-control"
+                                            ng-options="event.name for event in ctrl.events"
+                                            ng-model="ctrl.newDependencyData.w"></select>
+                    <label>To</label><select class="form-control"
+                               ng-options="event.name for event in ctrl.events"
+                               ng-model="ctrl.newDependencyData.v"></select>
+                    <label>Type</label><select class="form-control"
+                                    ng-options="type.name for type in ctrl.constraintTypes"
+                                    ng-model="ctrl.newDependencyData.type"></select>
+                    <label>Data</label><input ng-model="ctrl.newDependencyData.data">
+                    <button ng-click="ctrl.addDependency()" class="btn btn-default">Add</button>
+                </div>
+            </form>
+            <form class="form-inline">
+                <div class="form-group">
+                    <h4>Remove Edge</h4>
+                    <label>Edge</label> <select class="form-control"
+                                   ng-options="dependency for dependency in ctrl.dependencies"
+                                   ng-model="ctrl.dependencyToRemove"></select>
+                    <button ng-click="ctrl.removeDependency()" class="btn btn-default">Remove</button>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="col-md-9">
+            <sg-canvas></sg-canvas>
+        </div>
+    </div>
+
 </div>

@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            List of events:
+            <pre ng-repeat="event in events">{{ event.toString() }}</pre>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div>
+            List of dependencies:
+            <pre ng-repeat="dependency in dependencies">{{ dependency.toString() }}</pre>
+        </div>
+    </div>
+</div>
