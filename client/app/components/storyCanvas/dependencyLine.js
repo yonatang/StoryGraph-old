@@ -7,22 +7,24 @@
                 return {
                     replace: true,
                     scope: {
-                        sgDependency: '='
+                        dep: '=sgDependency'
                     },
                     template: '<line ' +
                         'ng-attr-x1="{{getE1().x}}" ng-attr-y1="{{getE1().y}}" ' +
                         'ng-attr-x2="{{getE2().x}}" ng-attr-y2="{{getE2().y}}" ' +
-                        'style="stroke:rgb(255,0,0);stroke-width:2" />',
+                        'class="dep-class" ' +
+                        'ng-class="cssStyle" />',
                     link: function(scope){
-                        var dependency = scope.sgDependency;
+                        var dependency = scope.dep;
                         scope.getE1 = function(){
                             return storyGraphService.getEventById(dependency.event1Id);
                         };
                         scope.getE2 = function(){
                             return storyGraphService.getEventById(dependency.event2Id);
                         };
-
-                        console.log(dependency);
+                        scope.$watch('dep.type', function(type){
+                            scope.cssStyle = 'dep-class-'+type;
+                        });
                     }
                 };
             }]);

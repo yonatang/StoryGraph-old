@@ -62,6 +62,19 @@ svg {
     .selected {
         fill: yellow;
     }
+    .dep-class {
+        stroke-width:2;
+    }
+
+    .dep-class-who {
+        stroke:rgb(255,0,0);
+    }
+    .dep-class-where {
+        stroke:rgb(255,255,0);
+    }
+    .dep-class-when {
+        stroke:rgb(200,30,255);
+    }
 }
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
