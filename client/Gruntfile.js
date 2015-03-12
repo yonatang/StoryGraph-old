@@ -422,8 +422,9 @@ module.exports = function (grunt) {
                 singleRun: true
             }
         },
-
+        /*jshint camelcase: false */
         aws_s3: {
+        /*jshint camelcase: true */
             options: {
                 accessKeyId: '<%= aws.AWSAccessKeyId %>', // Use the variables
                 secretAccessKey: '<%= aws.AWSSecretKey %>', // You can also use env variables
@@ -519,6 +520,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('deploy', [
+        'default',
         'aws_s3:demoClean',
         'aws_s3:demo'
     ]);
