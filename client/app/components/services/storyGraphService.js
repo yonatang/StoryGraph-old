@@ -55,6 +55,10 @@
                 refreshDataStructure();
             };
 
+            this.getEventById = function(eventId) {
+                return _graph.node(eventId);
+            };
+
             this.selectEvent = function (event) {
                 angular.forEach(_nodes, function (node) {
                     node.selected = false;
