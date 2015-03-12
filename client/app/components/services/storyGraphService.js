@@ -5,6 +5,7 @@
         this.id = id;
         this.x = x;
         this.y = y;
+        this.selected = false;
         this.name = name || 'Event ' + id;
     }
 
@@ -30,6 +31,7 @@
             }
             var _graph = new window.graphlib.Graph({multigraph: true}),
                 _id = 0,
+                _state = {},
                 _nodes = [],
                 _edges = [];
 
@@ -53,6 +55,14 @@
                 refreshDataStructure();
             };
 
+            this.selectEvent = function (event) {
+                angular.forEach(_nodes, function (node) {
+                    node.selected = false;
+                });
+                event.selected = true;
+                _state.selectedEvent = event;
+            };
+
             this.removeDependency = function (dependency) {
                 if (!dependency) {
                     console.error('trying to remove null dependency');
@@ -73,6 +83,7 @@
                 });
             };
 
+            this.state=_state;
             this.events = _nodes;
             this.dependencies = _edges;
 

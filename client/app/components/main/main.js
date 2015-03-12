@@ -15,7 +15,6 @@
             ];
 
             ctrl.constraintTypes = CONSTRAINT_TYPES;
-            ctrl.newEventData = {};
             ctrl.newDependencyData = {};
             ctrl.eventToRemove = null;
             ctrl.dependencyToRemove = null;
@@ -23,8 +22,7 @@
             ctrl.dependencies = storyGraphService.dependencies;
 
             ctrl.addEvent = function () {
-                var newEventData = ctrl.newEventData;
-                storyGraphService.addNewEvent(newEventData.x, newEventData.y);
+                storyGraphService.addNewEvent(10, 10);
                 ctrl.newEventData = {};
             };
             ctrl.addDependency = function () {

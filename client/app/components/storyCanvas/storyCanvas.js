@@ -10,6 +10,7 @@
                     link: function (scope) {
                         scope.events = storyGraphService.events;
                         scope.dependencies = storyGraphService.dependencies;
+                        scope.state = storyGraphService.state;
                     }
                 };
 

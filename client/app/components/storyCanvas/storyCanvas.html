@@ -1,4 +1,14 @@
 <div class="row">
+    <svg style="width:100%; background-color: blue">
+        <sg-event-circle ng-repeat="event in events" sg-event="event"></sg-event-circle>
+    </svg>
+</div>
+<div class="row">
+    Selected event: {{state.selectedEvent}}
+</div>
+<div class="row">
+
+
     <div class="col-md-6">
         <div>
             List of events:
