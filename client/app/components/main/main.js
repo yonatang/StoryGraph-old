@@ -22,7 +22,7 @@
             ctrl.dependencies = storyGraphService.dependencies;
 
             ctrl.addEvent = function () {
-                storyGraphService.addNewEvent(10, 10);
+                storyGraphService.addNewEvent(10+Math.random()*100, 10+Math.random()*100);
                 ctrl.newEventData = {};
             };
             ctrl.addDependency = function () {
