@@ -13,7 +13,8 @@
                     'ng-class="{ selected : sgEvent.selected }" ' +
                     'ng-attr-cx="{{sgEvent.x}}" ng-attr-cy="{{sgEvent.y}}" r="10" ' +
                     'ng-mousedown="nodeMouseDown($event, sgEvent)"></circle>',
-                    link: function (scope) {
+                    link: function (scope, element) {
+                        element.css('cursor', 'pointer');
                         scope.nodeMouseDown = function (event, sgEvent) {
                             dragging.startDrag(event, {
                                 //dragStarted: function (x, y) {
