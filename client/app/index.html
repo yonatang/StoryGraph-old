@@ -13,6 +13,15 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <script type="application/javascript">
+        window.build={
+            "buildDate":"$^BUILD_DATE_STRING^$",
+            "commit":"$^COMMIT_ID^$"
+        };
+        if (console && console.log){
+            console.log('version',window.build.commit,window.build.buildDate);
+        }
+    </script>
 </head>
 <body ng-app="sg">
 <!--[if lt IE 7]>

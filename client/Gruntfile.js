@@ -27,6 +27,33 @@ module.exports = function (grunt) {
         // Project settings
         yeoman: appConfig,
 
+        'git-describe': {
+            'options': {
+                // Task-specific options go here.
+            },
+            'me': {}
+        },
+        replace: {
+            version: {
+                src: ['dist/index.html'],
+                overwrite: true,                 // overwrite matched source files
+                replacements: [{
+                    from: /\$\^COMMIT_ID\^\$/g,
+                    to:
+                        function (/*matchedWord, index, fullText, regexMatches*/) {
+                            // matchedWord:  "world"
+                            // index:  6
+                            // fullText:  "Hello world"
+                            // regexMatches:  ["ld"]
+                            //return 'planet';   //
+                            return grunt.option('gitRevision').object;
+                        }
+                }, {
+                    from: /\$\^BUILD_DATE_STRING\^\$/g,
+                    to: grunt.template.today('isoDateTime')
+                }]
+            }
+        },
         // Watches files for changes and runs tasks based on the changed files
         watch: {
             bower: {
@@ -467,7 +494,19 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.registerTask('saveRevision', function() {
+        grunt.event.once('git-describe', function (rev) {
+            grunt.log.writeln('Git Revision: ' + rev.object);
+            grunt.option('gitRevision', rev);
+        });
+        grunt.task.run('git-describe');
+    });
+    grunt.registerTask('tag-revision', function(){
+        grunt.task.requires('git-describe');
+        grunt.log.writeln('Stamping files with commit '+grunt.option('gitRevision'));
+    });
 
+    grunt.registerTask('version', ['saveRevision', 'tag-revision','replace:version']);
     grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
         if (target === 'dist') {
             return grunt.task.run(['build', 'connect:dist:keepalive']);
@@ -511,7 +550,8 @@ module.exports = function (grunt) {
         'uglify',
         'filerev',
         'usemin',
-        'htmlmin'
+        'htmlmin',
+        'version'
     ]);
 
     grunt.registerTask('default', [
