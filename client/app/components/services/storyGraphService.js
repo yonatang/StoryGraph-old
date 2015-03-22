@@ -24,7 +24,7 @@
         return '(' + this.type + ': ' + this.event1Id + ' -> ' + this.event2Id + ')';
     };
 
-    angular.module('sg.services', []).service('storyGraphService', [
+    angular.module('sg.services').service('storyGraphService', [
         function () {
             if (!window.graphlib) {
                 throw new Error('Missing graphlib');
@@ -55,7 +55,7 @@
                 refreshDataStructure();
             };
 
-            this.getEventById = function(eventId) {
+            this.getEventById = function (eventId) {
                 return _graph.node(eventId);
             };
 
@@ -87,7 +87,7 @@
                 });
             };
 
-            this.state=_state;
+            this.state = _state;
             this.events = _nodes;
             this.dependencies = _edges;
 
