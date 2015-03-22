@@ -31,7 +31,6 @@
                     // Handler for mousemove events while the mouse is 'captured'.
                     //
                     var mouseMove = function (evt) {
-
                         if (!dragging) {
                             if (Math.abs(evt.pageX - x) > threshold ||
                                 Math.abs(evt.pageY - y) > threshold) {

@@ -9,22 +9,26 @@
                     scope: {
                         sgEvent: '=sgEvent'
                     },
-                    template: '<circle ' +
-                    'ng-class="{ selected : sgEvent.selected }" ' +
-                    'ng-attr-cx="{{sgEvent.x}}" ng-attr-cy="{{sgEvent.y}}" r="10" ' +
-                    'ng-mousedown="nodeMouseDown($event, sgEvent)"></circle>',
+                    templateUrl: '/components/storyCanvas/eventCircle.tpl.html',
                     link: function (scope, element) {
+                        scope.radius=25;
                         element.css('cursor', 'pointer');
+                        var xClick, yClick;
                         scope.nodeMouseDown = function (event, sgEvent) {
                             dragging.startDrag(event, {
-                                //dragStarted: function (x, y) {
-                                //},
+                                dragStarted: function (x, y) {
+                                    var offset = element.offset();
+                                    xClick = x - offset.left;
+                                    yClick = y - offset.top;
+                                },
                                 dragging: function (x, y, evt) {
-                                    scope.sgEvent.x = evt.offsetX;
-                                    scope.sgEvent.y = evt.offsetY;
+                                    scope.sgEvent.x = evt.offsetX - xClick;
+                                    scope.sgEvent.y = evt.offsetY - yClick;
                                 },
                                 clicked: function () {
                                     storyGraphService.selectEvent(sgEvent);
+                                },
+                                dragEnded: function () {
                                 }
                                 //clicked: // ...
                                 //});
