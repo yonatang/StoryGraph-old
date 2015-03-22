@@ -1,26 +1,32 @@
-<div class="row">
-    <svg style="width:100%; background-color: blue">
-        <sg-event-circle ng-repeat="event in events" sg-event="event"></sg-event-circle>
-        <sg-event-dependency ng-repeat="dependency in dependencies" sg-dependency="dependency"></sg-event-dependency>
-    </svg>
-</div>
-<div class="row">
-    Selected event: {{state.selectedEvent}}
-</div>
-<div class="row">
+<div class="row full-height">
+    <div class="col-md-10 full-height">
+        <svg style="width:100%; background-color: blue" class="full-height">
+            <sg-event-circle ng-repeat="event in events" sg-event="event"></sg-event-circle>
+            <sg-event-dependency ng-repeat="dependency in dependencies"
+                                 sg-dependency="dependency"></sg-event-dependency>
+        </svg>
+    </div>
+    <div class="col-md-2">
+        <div class="row">
+            Selected event: {{state.selectedEvent}}
+        </div>
+        <div class="row">
 
 
-    <div class="col-md-6">
-        <div>
-            List of events:
-            <pre ng-repeat="event in events">{{ event.toString() }}</pre>
+            <div class="col-md-6">
+                <div>
+                    List of events:
+                    <pre ng-repeat="event in events">{{ event.toString() }}</pre>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div>
+                    List of dependencies:
+                    <pre ng-repeat="dependency in dependencies">{{ dependency.toString() }}</pre>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="col-md-6">
-        <div>
-            List of dependencies:
-            <pre ng-repeat="dependency in dependencies">{{ dependency.toString() }}</pre>
-        </div>
-    </div>
 </div>
+
