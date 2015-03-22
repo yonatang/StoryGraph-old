@@ -45,7 +45,7 @@
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider
                 .when('/', {
-                    templateUrl: 'components/main/main.html',
+                    templateUrl: '/components/main/main.html',
                     controller: 'MainController as ctrl'
                 })
                 .otherwise({

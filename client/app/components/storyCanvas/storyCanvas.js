@@ -5,7 +5,7 @@
         .directive('sgCanvas', ['storyGraphService',
             function (storyGraphService) {
                 return {
-                    templateUrl: 'components/storyCanvas/storyCanvas.html',
+                    templateUrl: '/components/storyCanvas/storyCanvas.html',
                     restrict: 'E',
                     link: function (scope) {
                         scope.events = storyGraphService.events;

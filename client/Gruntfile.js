@@ -54,6 +54,27 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        /*jshint camelcase: false */
+        inline_angular_templates: {
+        /*jshint camelcase: true */
+            dist: {
+                options: {
+                    base: 'dist/components',
+                    prefix: '/components',
+                    selector: 'body',       // (Optional) CSS selector of the element to use to insert the templates. Default is `body`.
+                    method: 'prepend',       // (Optional) DOM insert method. Default is `prepend`.
+                    unescape: {             // (Optional) List of escaped characters to unescape
+                        '&lt;': '<',
+                        '&gt;': '>',
+                        '&apos;': '\'',
+                        '&amp;': '&'
+                    }
+                },
+                files: {
+                    'dist/index.html': ['dist/components/**/*.html']
+                }
+            }
+        },
         // Watches files for changes and runs tasks based on the changed files
         watch: {
             bower: {
@@ -551,6 +572,7 @@ module.exports = function (grunt) {
         'filerev',
         'usemin',
         'htmlmin',
+        'inline_angular_templates',
         'version'
     ]);
 
