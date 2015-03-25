@@ -5,10 +5,11 @@
         'sg.services',
         'ngRoute'
     ]);
-    module.controller('MainController', ['$scope', 'storyGraphService', 'editEvent',
-        function ($scope, storyGraphService, editEvent) {
+    module.controller('MainController', ['$scope', 'storyGraphService', 'editEvent', 'buildData',
+        function ($scope, storyGraphService, editEvent, buildData) {
             var ctrl = this;
-            $scope=$scope;
+            ctrl.buildData = buildData;
+            console.log('buildData',buildData);
 
             var CONSTRAINT_TYPES = [
                 {name: 'where'}, {name: 'when'}, {name: 'who'}
@@ -60,6 +61,7 @@
                 .otherwise({
                     redirectTo: '/'
                 });
-        }]);
+        }])
+        .constant('buildData', window.build);
 
 }(angular, window));

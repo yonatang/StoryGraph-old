@@ -18,6 +18,12 @@
             "buildDate":"$^BUILD_DATE_STRING^$",
             "commit":"$^COMMIT_ID^$"
         };
+        if (window.build.buildDate.indexOf('$^')!==-1){
+            window.build.buildDate='N/A';
+        }
+        if (window.build.commit.indexOf('$^')!==-1){
+            window.build.commit='N/A';
+        }
         if (console && console.log){
             console.log('version',window.build.commit,window.build.buildDate);
         }
