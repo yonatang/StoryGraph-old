@@ -31,6 +31,7 @@ module.exports = function (config) {
             'bower_components/lodash/dist/lodash.compat.js',
             'bower_components/graphlib/dist/graphlib.core.js',
             'bower_components/graphlib/dist/graphlib.core.min.js',
+            'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'app/components/**/*.js',

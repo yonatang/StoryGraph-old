@@ -31,7 +31,7 @@
             }
             var _graph = new window.graphlib.Graph({multigraph: true}),
                 _id = 0,
-                _state = {},
+                _state = {selectedEvents : []},
                 _nodes = [],
                 _edges = [];
 
@@ -46,25 +46,46 @@
                 refreshDataStructure();
             };
 
-            this.removeEvent = function (event) {
-                if (!event) {
+            this.removeEvent = function (events) {
+                if (!events) {
                     console.error('trying to remove null event');
                     return;
                 }
-                _graph.removeNode(event.id);
+                if (!angular.isArray(events)){
+                    events=[events];
+                } else {
+                    events = [].concat(events);
+                }
+                angular.forEach(events, function(event){
+                    _graph.removeNode(event.id);
+                    var idx=_state.selectedEvents.indexOf(event);
+                    if (idx>-1){
+                        _state.selectedEvents.splice(idx,1);
+                    }
+                });
                 refreshDataStructure();
+            };
+
+            this.deselectAll = function (){
+                angular.forEach(_state.selectedEvents, function(node){
+                    node.selected=false;
+                });
+                _state.selectedEvents = [];
             };
 
             this.getEventById = function (eventId) {
                 return _graph.node(eventId);
             };
 
-            this.selectEvent = function (event) {
-                angular.forEach(_nodes, function (node) {
-                    node.selected = false;
-                });
+            this.selectEvent = function (event, append) {
+                if (!append) {
+                    angular.forEach(_nodes, function (node) {
+                        node.selected = false;
+                    });
+                    _state.selectedEvents = [];
+                }
                 event.selected = true;
-                _state.selectedEvent = event;
+                _state.selectedEvents.push(event);
             };
 
             this.removeDependency = function (dependency) {

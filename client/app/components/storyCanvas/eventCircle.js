@@ -26,7 +26,10 @@
                                     scope.sgEvent.y = evt.offsetY - yClick;
                                 },
                                 clicked: function () {
-                                    storyGraphService.selectEvent(sgEvent);
+                                    var append=event.shiftKey;
+                                    storyGraphService.selectEvent(sgEvent,append);
+                                    event.stopPropagation();
+                                    event.preventDefault();
                                 },
                                 dragEnded: function () {
                                 }

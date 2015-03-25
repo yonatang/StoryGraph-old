@@ -17,7 +17,8 @@
             'ngResource',
 
             'ngSanitize',
-            'ngTouch'
+            'ngTouch',
+            'ui.bootstrap'
         ]);
     //
     //.config(function ($routeProvider) {

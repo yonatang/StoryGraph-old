@@ -5,8 +5,8 @@
         'sg.services',
         'ngRoute'
     ]);
-    module.controller('MainController', ['$scope', 'storyGraphService',
-        function ($scope, storyGraphService) {
+    module.controller('MainController', ['$scope', 'storyGraphService', 'editEvent',
+        function ($scope, storyGraphService, editEvent) {
             var ctrl = this;
             $scope=$scope;
 
@@ -20,7 +20,17 @@
             ctrl.dependencyToRemove = null;
             ctrl.events = storyGraphService.events;
             ctrl.dependencies = storyGraphService.dependencies;
+            ctrl.state = storyGraphService.state;
 
+            ctrl.canDelete = function(){
+                return ctrl.state.selectedEvents.length > 0;
+            };
+            ctrl.canEdit = function(){
+                return ctrl.state.selectedEvents.length === 1;
+            };
+            ctrl.edit = function(){
+                editEvent(ctrl.state.selectedEvents[0]);
+            };
             ctrl.addEvent = function () {
                 storyGraphService.addNewEvent(10+Math.random()*100, 10+Math.random()*100);
                 ctrl.newEventData = {};
@@ -36,10 +46,9 @@
                 storyGraphService.removeDependency(dependencyToRemove);
                 ctrl.edgeToRemove = null;
             };
-            ctrl.removeEvent = function(){
-                var eventToRemove = ctrl.eventToRemove;
-                storyGraphService.removeEvent(eventToRemove);
-                ctrl.eventToRemove = null;
+            ctrl.removeSelected = function(){
+                console.log(storyGraphService.state.selectedEvents);
+                storyGraphService.removeEvent(storyGraphService.state.selectedEvents);
             };
         }])
         .config(['$routeProvider', function ($routeProvider) {

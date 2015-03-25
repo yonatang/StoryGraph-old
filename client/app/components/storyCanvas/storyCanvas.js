@@ -11,9 +11,10 @@
                         scope.events = storyGraphService.events;
                         scope.dependencies = storyGraphService.dependencies;
                         scope.state = storyGraphService.state;
+                        scope.deselectAll = function(){
+                            storyGraphService.deselectAll();
+                        };
                     }
                 };
-
-
             }]);
 })(angular, window);
