@@ -1,53 +1,6 @@
 <div class="full-height">
     <div class="row full-height">
 
-        <!--<div class="col-md-3">-->
-            <!--Operations:-->
-            <!--<form class="form-inline">-->
-                <!--<div class="form-group">-->
-                    <!--<h4>Add Event</h4>-->
-                    <!--<button ng-click="ctrl.addEvent()" class="btn btn-default">Add</button>-->
-                <!--</div>-->
-            <!--</form>-->
-
-            <!--<form class="form-inline">-->
-                <!--<div class="form-group">-->
-                    <!--<h4>Remove Event</h4>-->
-                    <!--<label>Event</label> <select class="form-control"-->
-                                   <!--ng-options="event.name for event in ctrl.events"-->
-                                   <!--ng-model="ctrl.eventToRemove"></select>-->
-                    <!--<button ng-click="ctrl.removeEvent()" class="btn btn-default">Remove</button>-->
-                <!--</div>-->
-            <!--</form>-->
-
-            <!--<form class="form-inline">-->
-                <!--<div class="form-group">-->
-                    <!--<h4>Add Dependency</h4>-->
-                    <!--<label>From</label><select class="form-control"-->
-                                            <!--ng-options="event.name for event in ctrl.events"-->
-                                            <!--ng-model="ctrl.newDependencyData.w"></select>-->
-                    <!--<label>To</label><select class="form-control"-->
-                               <!--ng-options="event.name for event in ctrl.events"-->
-                               <!--ng-model="ctrl.newDependencyData.v"></select>-->
-                    <!--<label>Type</label><select class="form-control"-->
-                                    <!--ng-options="type.name for type in ctrl.constraintTypes"-->
-                                    <!--ng-model="ctrl.newDependencyData.type"></select>-->
-                    <!--<label>Data</label><input ng-model="ctrl.newDependencyData.data">-->
-                    <!--<button ng-click="ctrl.addDependency()" class="btn btn-default">Add</button>-->
-                <!--</div>-->
-            <!--</form>-->
-            <!--<form class="form-inline">-->
-                <!--<div class="form-group">-->
-                    <!--<h4>Remove Edge</h4>-->
-                    <!--<label>Edge</label> <select class="form-control"-->
-                                   <!--ng-options="dependency for dependency in ctrl.dependencies"-->
-                                   <!--ng-model="ctrl.dependencyToRemove"></select>-->
-                    <!--<button ng-click="ctrl.removeDependency()" class="btn btn-default">Remove</button>-->
-                <!--</div>-->
-            <!--</form>-->
-
-        <!--</div>-->
-
         <div class="remote-col-md-9 canvas-tab full-height">
             <div class="btn-group" role="group" aria-label="...">
                 <button type="button"
@@ -56,13 +9,6 @@
                     <span class="glyphicon glyphicon-plus"></span>
                     <span>Add Event</span>
                 </button>
-                <!--<button type="button"-->
-                        <!--class="btn btn-default"-->
-                        <!--ng-disabled="!ctrl.canConnect()"-->
-                        <!--ng-click="ctrl.connectEvents()">-->
-                    <!--<span class="glyphicon glyphicon-link"></span>-->
-                    <!--<span>Add Dependency</span>-->
-                <!--</button>-->
                 <button type="button"
                     class="btn btn-default"
                     ng-disabled="!ctrl.canEdit()"
@@ -82,6 +28,10 @@
                     <!--<span class="glyphicon glyphicon-question-sign"></span>-->
                 <!--</span>-->
                 <span class="well">Hold <kbd>Shift</kbd> for multiselect</span>
+                <span>Profile: {{ctrl.profile.name}}</span>
+
+            </div>
+            <div class="pull-right">
                 <span>Build {{ctrl.buildData.commit}}, date {{ctrl.buildData.buildDate}}</span>
             </div>
             <sg-canvas></sg-canvas>

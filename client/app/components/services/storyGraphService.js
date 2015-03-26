@@ -25,7 +25,8 @@
     };
 
     angular.module('sg.services').service('storyGraphService', [
-        function () {
+        'sg.profiles',
+        function (profiles) {
             if (!window.graphlib) {
                 throw new Error('Missing graphlib');
             }
@@ -111,6 +112,7 @@
             this.state = _state;
             this.events = _nodes;
             this.dependencies = _edges;
+            this.profile = profiles[0];
 
         }]);
 

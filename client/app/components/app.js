@@ -12,13 +12,15 @@
     angular
         .module('sg', [
             'sg.main',
+            'sg.model',
             'ngAnimate',
             'ngCookies',
             'ngResource',
 
             'ngSanitize',
             'ngTouch',
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'checklist-model'
         ]);
     //
     //.config(function ($routeProvider) {

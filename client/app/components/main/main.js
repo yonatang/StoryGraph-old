@@ -22,6 +22,7 @@
             ctrl.events = storyGraphService.events;
             ctrl.dependencies = storyGraphService.dependencies;
             ctrl.state = storyGraphService.state;
+            ctrl.profile = storyGraphService.profile;
 
             ctrl.canDelete = function(){
                 return ctrl.state.selectedEvents.length > 0;
