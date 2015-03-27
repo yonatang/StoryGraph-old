@@ -71,7 +71,7 @@
                 operators: {value: singleValueOperator},
                 options: {
                     get: function () {
-                        return this.profile.timesById;
+                        return this.profile.times;
                     }
                 }
             });
@@ -84,6 +84,7 @@
         .factory('CharacterConstraint', ['Constraint', function (Constraint) {
             function CharacterConstraint(profile) {
                 Constraint.call(this, 'who', profile);
+                this.group=null;
             }
 
             CharacterConstraint.prototype = Object.create(Constraint.prototype, {
@@ -110,7 +111,7 @@
                 operators: {value: singleValueOperator},
                 options: {
                     get: function () {
-                        return this.profile.locationsById;
+                        return this.profile.locations;
                     }
                 }
             });
