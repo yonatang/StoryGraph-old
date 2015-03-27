@@ -49,6 +49,11 @@
                     value: function(other){
                         $.extend(this,other);
                     }
+                },
+                valid: {
+                    get: function(){
+                        return this.operator && this.value && this.value.length > 0;
+                    }
                 }
             });
 

@@ -22,8 +22,21 @@
 
 </div>
 <div class="modal-footer">
-    <button class="btn btn-info" ng-click="ctrl.next()" ng-if="ctrl.page==1">Next</button>
-    <button class="btn btn-info" ng-click="ctrl.back()" ng-if="ctrl.page==2 && !ctrl.editMode">Back</button>
-    <button class="btn btn-primary" ng-if="ctrl.page==2" ng-click="ctrl.ok()" ng-disabled="constraintEditForm.$invalid">OK</button>
-    <button class="btn btn-warning" ng-click="ctrl.cancel()">Cancel</button>
+    <button class="btn btn-info"
+            ng-click="ctrl.next()"
+            ng-disabled="!ctrl.type"
+            ng-if="ctrl.page==1">Next
+    </button>
+    <button class="btn btn-info"
+            ng-click="ctrl.back()"
+            ng-if="ctrl.page==2 && !ctrl.editMode">Back
+    </button>
+    <button class="btn btn-primary"
+            ng-if="ctrl.page==2"
+            ng-click="ctrl.ok()"
+            ng-disabled="constraintEditForm.$invalid || !ctrl.constraint.valid">OK
+    </button>
+    <button class="btn btn-warning"
+            ng-click="ctrl.cancel()">Cancel
+    </button>
 </div>

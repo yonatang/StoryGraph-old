@@ -4,6 +4,7 @@
 <div class="form-group">
     <label>Select operator</label>
     <select class="form-control"
+            required
             ng-options="operator as operator.name for (id , operator) in ctrl.constraint.operators"
             ng-model="ctrl.constraint.operator"></select>
 </div>
