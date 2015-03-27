@@ -1,18 +1,6 @@
 (function (angular, window, undefined) {
     'use strict';
 
-    function StoryEvent(id, x, y, name) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.selected = false;
-        this.name = name || 'Event ' + id;
-    }
-
-    StoryEvent.prototype.toString = function () {
-        return '(' + this.id + ': ' + this.name + ')';
-    };
-
     function StoryEventDependency(event1Id, event2Id, type, data) {
         this.event1Id = event1Id;
         this.event2Id = event2Id;
@@ -25,8 +13,8 @@
     };
 
     angular.module('sg.services').service('storyGraphService', [
-        'sg.profiles',
-        function (profiles) {
+        'sg.profiles', 'StoryEvent',
+        function (profiles,StoryEvent) {
             if (!window.graphlib) {
                 throw new Error('Missing graphlib');
             }

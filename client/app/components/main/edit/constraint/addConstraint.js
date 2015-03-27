@@ -37,7 +37,7 @@
                     ctrl.page--;
                     ctrl.constraint = null;
                 };
-                ctrl.constraint = editMode ? angular.copy(constraint) : null;
+                ctrl.constraint = editMode ? constraint.clone() : null;
                 ctrl.cancel = function () {
                     return $modalInstance.dismiss();
                 };
