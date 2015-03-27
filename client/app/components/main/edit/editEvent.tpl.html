@@ -21,7 +21,9 @@
                     <tbody>
                     <tr ng-repeat="constraint in ctrl.sgEvent.constraints">
                         <td>{{constraint.type}}{{constraint.soft ? ' (optional)':''}}</td>
-                        <td>{{constraint.operator.name}}</td>
+                        <td>{{constraint.operator.name}} {{constraint.operator.extraN ? '('+constraint.extraN+')' :
+                            ''}}
+                        </td>
                         <td>{{constraint.valueNames.join(', ')}}</td>
                         <td>
                             <a href

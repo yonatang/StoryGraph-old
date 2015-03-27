@@ -6,7 +6,7 @@
     };
     var multiValueOperator = {
         'includeAll': {id: 'includeAll', name: 'Must include all of'},
-        'includeN': {id: 'includeN', name: 'Must include N of', extra: true},
+        'includeN': {id: 'includeN', name: 'Must include N of', extraN: true},
         'excludeAll': {id: 'excludeAll', name: 'Cannot include all of'}
     };
     angular.module('sg.model')
