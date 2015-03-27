@@ -90,7 +90,7 @@
                 operators: {value: multiValueOperator},
                 options: {
                     get: function () {
-                        return this.profile.charactersById;
+                        return this.profile.characters;
                     }
                 }
             });
