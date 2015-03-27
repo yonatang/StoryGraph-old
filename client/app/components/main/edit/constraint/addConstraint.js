@@ -5,12 +5,11 @@
             'TimeConstraint', 'CharacterConstraint', 'LocationConstraint', 'ThingConstraint',
             function ($modalInstance, constraint, profile,
                       TimeConstraint, CharacterConstraint, LocationConstraint, ThingConstraint) {
-                console.log('AddConstraintController', constraint, profile);
                 var ctrl = this;
                 var originalConstraint = constraint;
                 var editMode = ctrl.editMode = !!constraint;
 
-                ctrl.type = null;
+                ctrl.type = editMode ? constraint.type : null;
                 ctrl.page = editMode ? 2 : 1;
                 ctrl.next = function () {
                     ctrl.page++;
@@ -30,8 +29,6 @@
                             break;
                     }
                     ctrl.constraint = new AbsConstructor(profile);
-                    console.log(ctrl.type);
-                    console.log(ctrl.constraint);
                 };
                 ctrl.back = function(){
                     ctrl.page--;
@@ -43,7 +40,7 @@
                 };
                 ctrl.ok = function () {
                     if (editMode) {
-                        $.extend(true, originalConstraint, ctrl.constraint);
+                        originalConstraint.mergeWith(ctrl.constraint);
                     } else {
                         originalConstraint = ctrl.constraint;
                     }
@@ -51,9 +48,8 @@
                 };
 
             }])
-        .factory('addConstraint', ['$modal', function ($modal) {
+        .factory('addEditConstraint', ['$modal', function ($modal) {
             return function (constraint, profile) {
-                console.log('addConstraint',constraint,profile);
                 var modalInstance = $modal.open({
                     templateUrl: '/components/main/edit/constraint/addConstraint.tpl.html',
                     controller: 'AddConstraintController as ctrl',

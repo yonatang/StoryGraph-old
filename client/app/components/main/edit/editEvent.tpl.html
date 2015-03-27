@@ -15,6 +15,7 @@
                         <th>Type</th>
                         <th>Operator</th>
                         <th>Value(s)</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -22,11 +23,23 @@
                         <td>{{constraint.type}}{{constraint.soft ? ' (optional)':''}}</td>
                         <td>{{constraint.operator.name}}</td>
                         <td>{{constraint.valueNames.join(', ')}}</td>
+                        <td>
+                            <a href
+                               tooltip="Remove Constraint"
+                               ng-click="ctrl.removeConstraint(constraint)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                            <a href
+                               tooltip="Edit Constraint"
+                               ng-click="ctrl.editConstraint(constraint)">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
                 <button class="btn btn-default"
-                    ng-click="ctrl.addConstraint()">
+                        ng-click="ctrl.addConstraint()">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
             </tab>
@@ -43,9 +56,11 @@
             </tab>
 
         </tabset>
-        Event raw data: <button class="btn btn-default"
-                            ng-init="isCollapsed=true"
-                            ng-click="isCollapsed=!isCollapsed">{{isCollapsed ? 'Show':'Hide'}}</button>
+        Event raw data:
+        <button class="btn btn-default"
+                ng-init="isCollapsed=true"
+                ng-click="isCollapsed=!isCollapsed">{{isCollapsed ? 'Show':'Hide'}}
+        </button>
         <pre collapse="isCollapsed">{{ctrl.sgEvent | json}}</pre>
     </form>
 </div>

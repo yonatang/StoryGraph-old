@@ -15,6 +15,7 @@
                 this.type = type;
                 this.operator = null;
                 this.value = [];
+                this.soft = false;
                 Object.defineProperty(this, 'profile', {
                     value: profile || undefined,
                     writable: true,
@@ -38,9 +39,15 @@
                     value: function () {
                         window.constOrg = this;
                         var cloned = new this.constructor(this.profile);
-                        $.extend(true, cloned, this);
+                        $.extend(cloned, this);
+                        cloned.value=[].concat(this.value);
                         window.constClone = cloned;
                         return cloned;
+                    }
+                },
+                mergeWith: {
+                    value: function(other){
+                        $.extend(this,other);
                     }
                 }
             });

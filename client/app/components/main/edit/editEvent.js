@@ -1,13 +1,12 @@
 (function (angular, undefined) {
     'use strict';
     angular.module('sg.main')
-        .controller('EditEventController', ['$modalInstance', 'sgEvent', 'addConstraint',
+        .controller('EditEventController', ['$modalInstance', 'sgEvent', 'addEditConstraint',
             'storyGraphService',
-            function ($modalInstance, sgEvent, addConstraint, storyGraphService) {
+            function ($modalInstance, sgEvent, addEditConstraint, storyGraphService) {
                 var ctrl = this;
                 var originalEvent = sgEvent;
-                ctrl.editMode = !!sgEvent;
-                ctrl.sgEvent = ctrl.editMode ? sgEvent.clone() : null;
+                ctrl.sgEvent = sgEvent.clone();
                 ctrl.cancel = function () {
                     return $modalInstance.dismiss();
                 };
@@ -16,10 +15,20 @@
                     return $modalInstance.close();
                 };
                 ctrl.addConstraint = function () {
-                    addConstraint(null, storyGraphService.profile).result
+                    addEditConstraint(null, storyGraphService.profile).result
                         .then(function (constraint) {
                             ctrl.sgEvent.constraints.push(constraint);
                         });
+                };
+                ctrl.removeConstraint = function(constraint){
+                    var constraints = ctrl.sgEvent.constraints;
+                    var idx= constraints.indexOf(constraint);
+                    if (idx>-1){
+                        constraints.splice(idx,1);
+                    }
+                };
+                ctrl.editConstraint = function(constraint){
+                    addEditConstraint(constraint, null);
                 };
 
             }])
