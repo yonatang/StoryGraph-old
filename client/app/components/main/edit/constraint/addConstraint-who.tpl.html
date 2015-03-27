@@ -14,23 +14,25 @@
         <span>Optional Constraint?</span>
     </label>
 </div>
-<div class="form-group">
+<div class="form-group"
+     ng-if="!ctrl.editMode">
     <label>Select Group</label>
     <!-- clear selections upon group change -->
     <select class="form-control"
             ng-change="ctrl.constraint.value.splice(0)"
             ng-options="group as group.name for group in ctrl.constraint.profile.groups"
-            ng-model="group"></select>
+            ng-model="ctrl.constraint.group"></select>
 </div>
 <div class="form-group"
-     ng-show="!!group">
+     ng-show="!!ctrl.constraint.group">
     <label>Select value(s)</label>
     <input class="form-control"
            ng-model="search"
            ng-init="search=''"
            placeholder="Filter options">
+
     <div class="checkbox"
-         ng-repeat="(id, option) in ctrl.constraint.options | filter:{group: group.id} | filter:{name:search}">
+         ng-repeat="(id, option) in ctrl.constraint.options | filter:{group: ctrl.constraint.group.id} | filter:{name:search}">
         <label>
             <input type="checkbox" checklist-model="ctrl.constraint.value" checklist-value="option">
             <span>{{option.name}}</span>
