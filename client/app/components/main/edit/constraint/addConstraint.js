@@ -11,7 +11,9 @@
                 throw new TypeError('predicate must be a function');
             }
             var list = Object(this);
+            /*jshint bitwise: false */
             var length = list.length >>> 0;
+            /*jshint bitwise: true */
             var thisArg = arguments[1];
             var value;
 
