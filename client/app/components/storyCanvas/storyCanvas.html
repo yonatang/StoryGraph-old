@@ -9,25 +9,30 @@
         </svg>
     </div>
     <div class="col-md-2">
-        <div class="row">
-            Selected event: {{state.selectedEvent}}
+        <div ng-if="state.selectedEvents.length==1">
+            <label>Event Details:</label>
+            <div class="form-horizontal" ng-init="sgEvent = state.selectedEvents[0]">
+                <div class="form-group">
+                    <label class="control-label">Name</label>
+                    <p class="form-control-static">{{sgEvent.name}}</p>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">ID</label>
+                    <p class="form-control-static">{{sgEvent.id}}</p>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Constraints</label>
+                    <ui>
+                        <li ng-repeat="constraint in sgEvent.constraints">{{constraint}}</li>
+                    </ui>
+                </div>
+            </div>
         </div>
-        <div class="row">
-
-
-            <div class="col-md-6">
-                <div>
-                    List of events:
-                    <pre ng-repeat="event in events">{{ event.toString() }}</pre>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div>
-                    List of dependencies:
-                    <pre ng-repeat="dependency in dependencies">{{ dependency.toString() }}</pre>
-                </div>
-            </div>
+        <div ng-if="state.selectedEvents.length>1">
+            <label>Selected Events:</label>
+            <ul>
+                <li ng-repeat="sgEvent in state.selectedEvents">{{sgEvent.id}}: {{sgEvent.name}}</li>
+            </ul>
         </div>
     </div>
 </div>
