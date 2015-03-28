@@ -1,8 +1,8 @@
-(function (angular, window, undefined) {
+(function (angular, undefined) {
     'use strict';
 
     angular.module('sg.storyCanvas')
-        .directive('sgEventShape', ['storyGraphService', 'dragging','editEvent',
+        .directive('sgEventShape', ['storyGraphService', 'dragging', 'editEvent',
             function (storyGraphService, dragging, editEvent) {
                 return {
                     replace: true,
@@ -11,10 +11,10 @@
                     },
                     templateUrl: '/components/storyCanvas/eventShape.tpl.html',
                     link: function (scope, element) {
-                        scope.radius=30;
+                        scope.radius = 30;
                         element.css('cursor', 'pointer');
                         var xClick, yClick;
-                        scope.dblClick = function(event, sgEvent){
+                        scope.dblClick = function (event, sgEvent) {
                             editEvent(sgEvent);
                         };
                         scope.nodeMouseDown = function (event, sgEvent) {
@@ -29,8 +29,8 @@
                                     scope.sgEvent.y = evt.offsetY - yClick;
                                 },
                                 clicked: function () {
-                                    var append=event.shiftKey;
-                                    storyGraphService.selectEvent(sgEvent,append);
+                                    var append = event.shiftKey;
+                                    storyGraphService.selectEvent(sgEvent, append);
                                     event.stopPropagation();
                                     event.preventDefault();
                                 },
@@ -41,4 +41,4 @@
                     }
                 };
             }]);
-})(angular, window);
+})(angular);
