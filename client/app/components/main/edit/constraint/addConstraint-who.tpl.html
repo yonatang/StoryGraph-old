@@ -44,9 +44,11 @@
                ng-model="search"
                ng-init="search=''"
                placeholder="Filter options">
+
         <div class="input-group-btn">
             <button class="btn"
-                ng-click="search=''">
+                    type="button"
+                    ng-click="search=''">
                 <span class="glyphicon glyphicon-remove"></span>
             </button>
         </div>

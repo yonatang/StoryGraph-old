@@ -28,10 +28,9 @@
                 valueNames: {
                     get: function () {
                         var arr = [];
-                        for (var i in this.value) {
-                            var elem = this.value[i];
+                        this.value.forEach(function(elem){
                             arr.push(elem.name);
-                        }
+                        });
                         return arr;
                     }
                 },
