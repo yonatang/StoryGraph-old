@@ -2,18 +2,21 @@
     'use strict';
 
     angular.module('sg.storyCanvas')
-        .directive('sgEventCircle', ['storyGraphService', 'dragging',
-            function (storyGraphService, dragging) {
+        .directive('sgEventShape', ['storyGraphService', 'dragging','editEvent',
+            function (storyGraphService, dragging, editEvent) {
                 return {
                     replace: true,
                     scope: {
                         sgEvent: '=sgEvent'
                     },
-                    templateUrl: '/components/storyCanvas/eventCircle.tpl.html',
+                    templateUrl: '/components/storyCanvas/eventShape.tpl.html',
                     link: function (scope, element) {
-                        scope.radius=25;
+                        scope.radius=30;
                         element.css('cursor', 'pointer');
                         var xClick, yClick;
+                        scope.dblClick = function(event, sgEvent){
+                            editEvent(sgEvent);
+                        };
                         scope.nodeMouseDown = function (event, sgEvent) {
                             dragging.startDrag(event, {
                                 dragStarted: function (x, y) {
@@ -33,8 +36,6 @@
                                 },
                                 dragEnded: function () {
                                 }
-                                //clicked: // ...
-                                //});
                             });
                         };
                     }
