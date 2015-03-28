@@ -1,8 +1,7 @@
 <div class="row full-height">
     <div class="col-md-10 full-height">
-        <svg style="width:100%; background-color: blue"
-             class="full-height"
-            ng-mousedown="deselectAll()">
+        <svg class="full-height main-canvas"
+             ng-mousedown="deselectAll()">
             <sg-event-shape ng-repeat="event in events" sg-event="event"></sg-event-shape>
             <sg-event-dependency ng-repeat="dependency in dependencies"
                                  sg-dependency="dependency"></sg-event-dependency>
@@ -11,13 +10,16 @@
     <div class="col-md-2">
         <div ng-if="state.selectedEvents.length==1">
             <label>Event Details:</label>
+
             <div class="form-horizontal" ng-init="sgEvent = state.selectedEvents[0]">
                 <div class="form-group">
                     <label class="control-label">Name</label>
+
                     <p class="form-control-static">{{sgEvent.name}}</p>
                 </div>
                 <div class="form-group">
                     <label class="control-label">ID</label>
+
                     <p class="form-control-static">{{sgEvent.id}}</p>
                 </div>
                 <div class="form-group">

@@ -71,6 +71,10 @@ body {
 }
 
 svg {
+    &.main-canvas {
+        background: #3B9BDC url("/images/blueprint-600x600.png");
+        width:100%;
+    }
     .selected {
         fill: yellow;
     }
