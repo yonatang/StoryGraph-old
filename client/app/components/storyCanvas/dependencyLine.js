@@ -17,10 +17,10 @@
                     link: function(scope){
                         var dependency = scope.dep;
                         scope.getE1 = function(){
-                            return storyGraphService.getEventById(dependency.event1Id);
+                            return storyGraphService.getEventById(dependency.fromEventId);
                         };
                         scope.getE2 = function(){
-                            return storyGraphService.getEventById(dependency.event2Id);
+                            return storyGraphService.getEventById(dependency.toEventId);
                         };
                         scope.$watch('dep.type', function(type){
                             scope.cssStyle = 'dep-class-'+type;

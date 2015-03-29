@@ -1,9 +1,10 @@
 (function (angular, undefined) {
     'use strict';
     angular.module('sg.model')
-        .factory('sg.Dependency', [function () {
-            function Dependency(type, id) {
-                this.id = id;
+        .factory('Dependency', [function () {
+            function Dependency(type, fromEventId, toEventId) {
+                this.fromEventId = fromEventId;
+                this.toEventId = toEventId;
                 this.type = type;
                 this.operator = null;
                 this.value = null;
@@ -18,10 +19,10 @@
 
         }])
 
-        .factory('sg.TimeDependency', ['sg.Dependency',
+        .factory('TimeDependency', ['Dependency',
             function (Dependency) {
-                function TimeDependency(id) {
-                    Dependency.call(this, 'time', id);
+                function TimeDependency(fromEventId, toEventId) {
+                    Dependency.call(this, 'when', fromEventId, toEventId);
                 }
 
                 TimeDependency.prototype = Object.create(Dependency.prototype, {

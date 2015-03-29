@@ -2,11 +2,13 @@
     'use strict';
     angular.module('sg.main')
         .controller('EditEventController', ['$modalInstance', 'sgEvent', 'addEditConstraint',
-            'storyGraphService',
-            function ($modalInstance, sgEvent, addEditConstraint, storyGraphService) {
+            'addEditDependency', 'storyGraphService',
+            function ($modalInstance, sgEvent, addEditConstraint, addEditDependency, storyGraphService) {
                 var ctrl = this;
                 var originalEvent = sgEvent;
                 ctrl.sgEvent = sgEvent.clone();
+                ctrl.inDeps = storyGraphService.eventDeps[sgEvent.id].inDeps;
+                ctrl.outDeps = storyGraphService.eventDeps[sgEvent.id].outDeps;
                 ctrl.cancel = function () {
                     return $modalInstance.dismiss();
                 };
@@ -20,14 +22,23 @@
                             ctrl.sgEvent.constraints.push(constraint);
                         });
                 };
-                ctrl.removeConstraint = function(constraint){
+                ctrl.addDependency = function () {
+                    addEditDependency(ctrl.sgEvent, null, storyGraphService.profile).result
+                        .then(function (dependencies) {
+                            console.log('adding dependencies', dependencies);
+                            angular.forEach(dependencies, function (dependency) {
+                                storyGraphService.addDependency(dependency);
+                            });
+                        });
+                };
+                ctrl.removeConstraint = function (constraint) {
                     var constraints = ctrl.sgEvent.constraints;
-                    var idx= constraints.indexOf(constraint);
-                    if (idx>-1){
-                        constraints.splice(idx,1);
+                    var idx = constraints.indexOf(constraint);
+                    if (idx > -1) {
+                        constraints.splice(idx, 1);
                     }
                 };
-                ctrl.editConstraint = function(constraint){
+                ctrl.editConstraint = function (constraint) {
                     addEditConstraint(constraint, null);
                 };
 

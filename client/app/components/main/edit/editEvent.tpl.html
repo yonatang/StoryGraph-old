@@ -42,7 +42,7 @@
                 </table>
                 <button class="btn btn-default"
                         ng-click="ctrl.addConstraint()">
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span>Add Constraint<span class="glyphicon glyphicon-plus"></span></span>
                 </button>
             </tab>
             <tab heading="Dependencies">
@@ -50,13 +50,28 @@
                     <thead>
                     <tr>
                         <th>Type</th>
-                        <th>Type</th>
-                        <th></th>
+                        <th>Operator</th>
+                        <th>Details</th>
                     </tr>
                     </thead>
+                    <tbody>
+                    <tr ng-repeat="outDep in ctrl.outDeps">
+                        <td>{{outDep.name}} (out)</td>
+                        <td>??</td>
+                        <td>??</td>
+                    </tr>
+                    <tr ng-repeat="inDep in ctrl.inDeps">
+                        <td>{{inDep.name}} (in)</td>
+                        <td>??</td>
+                        <td>??</td>
+                    </tr>
+                    </tbody>
                 </table>
+                <button class="btn btn-default"
+                        ng-click="ctrl.addDependency()">
+                    <span>Add Dependency<span class="glyphicon glyphicon-plus"></span></span>
+                </button>
             </tab>
-
         </tabset>
         Event raw data:
         <button class="btn btn-default"

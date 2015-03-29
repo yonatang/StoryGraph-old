@@ -11,21 +11,28 @@
         <div ng-if="state.selectedEvents.length==1">
             <label>Event Details:</label>
 
-            <div class="form-horizontal" ng-init="sgEvent = state.selectedEvents[0]">
+            <div class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label">Name</label>
 
-                    <p class="form-control-static">{{sgEvent.name}}</p>
+                    <p class="form-control-static">{{getSgEvent().name}}</p>
                 </div>
                 <div class="form-group">
                     <label class="control-label">ID</label>
 
-                    <p class="form-control-static">{{sgEvent.id}}</p>
+                    <p class="form-control-static">{{getSgEvent().id}}</p>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Constraints</label>
                     <ui>
-                        <li ng-repeat="constraint in sgEvent.constraints">{{constraint}}</li>
+                        <li ng-repeat="constraint in getSgEvent().constraints">{{constraint}}</li>
+                    </ui>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Dependencies</label>
+                    <ui>
+                        <li ng-repeat="inDep in eventDeps[getSgEvent().id].inDeps">{{inDep}}</li>
+                        <li ng-repeat="outDep in eventDeps[getSgEvent().id].outDeps">{{outDep}}</li>
                     </ui>
                 </div>
             </div>
