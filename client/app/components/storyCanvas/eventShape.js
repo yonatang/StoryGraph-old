@@ -16,6 +16,8 @@
                         var xClick, yClick;
                         scope.dblClick = function (event, sgEvent) {
                             editEvent(sgEvent);
+                            event.stopPropagation();
+                            event.preventDefault();
                         };
                         scope.nodeMouseDown = function (event, sgEvent) {
                             dragging.startDrag(event, {
