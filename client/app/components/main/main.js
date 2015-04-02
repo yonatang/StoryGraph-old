@@ -9,7 +9,7 @@
         function ($scope, storyGraphService, editEvent, buildData) {
             var ctrl = this;
             ctrl.buildData = buildData;
-            console.log('buildData',buildData);
+            console.log('buildData', buildData);
 
             var CONSTRAINT_TYPES = [
                 {name: 'where'}, {name: 'when'}, {name: 'who'}
@@ -24,17 +24,17 @@
             ctrl.state = storyGraphService.state;
             ctrl.profile = storyGraphService.profile;
 
-            ctrl.canDelete = function(){
+            ctrl.canDelete = function () {
                 return ctrl.state.selectedEvents.length > 0;
             };
-            ctrl.canEdit = function(){
+            ctrl.canEdit = function () {
                 return ctrl.state.selectedEvents.length === 1;
             };
-            ctrl.edit = function(){
+            ctrl.edit = function () {
                 editEvent(ctrl.state.selectedEvents[0]);
             };
             ctrl.addEvent = function () {
-                storyGraphService.addNewEvent(10+Math.random()*100, 10+Math.random()*100);
+                storyGraphService.addNewEvent(10 + Math.random() * 100, 10 + Math.random() * 100);
                 ctrl.newEventData = {};
             };
             ctrl.addDependency = function () {
@@ -43,15 +43,23 @@
                     newDependencyData.type.name, newDependencyData.data);
                 ctrl.newDependencyData = {};
             };
-            ctrl.removeDependency = function(){
+            ctrl.removeDependency = function () {
                 var dependencyToRemove = ctrl.dependencyToRemove;
                 storyGraphService.removeDependency(dependencyToRemove);
                 ctrl.edgeToRemove = null;
             };
-            ctrl.removeSelected = function(){
+            ctrl.removeSelected = function () {
                 console.log(storyGraphService.state.selectedEvents);
                 storyGraphService.removeEvent(storyGraphService.state.selectedEvents);
             };
+
+            ctrl.helpText =
+                '<div class="help-text">' +
+                '<li>Use <kbd>SHIFT</kbd> for multiselect</li>' +
+                '<li>Double click on canvas to add an event</li>' +
+                '<li>Double click on an event to edit it</li>' +
+                '<li>Click on canvas to deselect all</li>' +
+                '</div>';
         }])
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider

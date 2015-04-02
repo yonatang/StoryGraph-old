@@ -6,7 +6,7 @@
             'TimeDependency',
             function ($modalInstance, storyGraphService, sgEvent, dependency, profile, TimeDependency) {
                 var ctrl = this;
-                var originalDependency = dependency;
+                //var originalDependency = dependency;
                 var editMode = ctrl.editMode = !!dependency;
 
                 ctrl.events = storyGraphService.events;
@@ -48,7 +48,7 @@
                     angular.forEach(ctrl.targetEvents, function(eventId){
                         dependencies.push(new TimeDependency(ctrl.sgEvent.id,eventId));
                     });
-                    return $modalInstance.close(dependencies)
+                    return $modalInstance.close(dependencies);
                     //if (editMode) {
                     //    originalDependency.mergeWith(ctrl.dependency);
                     //} else {

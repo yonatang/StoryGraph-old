@@ -10,9 +10,9 @@
                     <span>Add Event</span>
                 </button>
                 <button type="button"
-                    class="btn btn-default"
-                    ng-disabled="!ctrl.canEdit()"
-                    ng-click="ctrl.edit()">
+                        class="btn btn-default"
+                        ng-disabled="!ctrl.canEdit()"
+                        ng-click="ctrl.edit()">
                     <span class="glyphicon glyphicon-pencil"></span>
                     <span>Edit</span>
                 </button>
@@ -24,13 +24,17 @@
                     <span class="glyphicon glyphicon-trash"></span>
                     <span>Remove</span>
                 </button>
-                <!--<span class="btn btn-default">-->
-                    <!--<span class="glyphicon glyphicon-question-sign"></span>-->
-                <!--</span>-->
-                <span class="well">Hold <kbd>Shift</kbd> for multiselect</span>
-                <span>Profile: {{ctrl.profile.name}}</span>
+                <button
+                    class="btn btn-default"
+                    tooltip-placement="bottom"
+                    tooltip-append-to-body="true"
+                    tooltip-Html-Unsafe="{{ctrl.helpText}}">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                </button>
 
             </div>
+            <span>Profile: {{ctrl.profile.name}}</span>
+
             <div class="pull-right">
                 <span>Build {{ctrl.buildData.commit}}, date {{ctrl.buildData.buildDate}}</span>
             </div>
