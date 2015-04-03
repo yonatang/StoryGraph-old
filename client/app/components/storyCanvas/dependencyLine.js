@@ -2,7 +2,8 @@
     'use strict';
 
     var eventWidth = 90,
-        eventHeight = 60;
+        eventHeight = 60,
+        typeFactor = 6;
 
     function getConnectionDirection(e1, e2) {
         var xDist = e2.x - e1.x,
@@ -34,7 +35,7 @@
     }
 
     function getConnectionCords(e1, e2, type) {
-        var typeFactor = 4;
+
         var x = e1.x, y = e1.y;
         switch (getConnectionDirection(e1, e2)) {
             //e2 is above

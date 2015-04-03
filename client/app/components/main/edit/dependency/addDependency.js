@@ -3,8 +3,9 @@
 
     angular.module('sg.main')
         .controller('AddDependencyController', ['$modalInstance', 'storyGraphService', 'sgEvent', 'dependency', 'profile',
-            'TimeDependency',
-            function ($modalInstance, storyGraphService, sgEvent, dependency, profile, TimeDependency) {
+            'TimeDependency', 'LocationDependency', 'CharacterDependency', 'ThingDependency',
+            function ($modalInstance, storyGraphService, sgEvent, dependency, profile, TimeDependency,
+            LocationDependency, CharacterDependency, ThingDependency) {
                 var ctrl = this;
                 //var originalDependency = dependency;
                 var editMode = ctrl.editMode = !!dependency;
@@ -46,7 +47,19 @@
                 ctrl.ok = function () {
                     var dependencies = [];
                     angular.forEach(ctrl.targetEvents, function(eventId){
-                        dependencies.push(new TimeDependency(ctrl.sgEvent.id,eventId));
+                        switch (ctrl.type){
+                            case 'when':
+                                dependencies.push(new TimeDependency(ctrl.sgEvent.id,eventId));
+                                break;
+                            case 'where':
+                                dependencies.push(new LocationDependency(ctrl.sgEvent.id,eventId));
+                                break;
+                            case 'who':
+                                dependencies.push(new CharacterDependency(ctrl.sgEvent.id,eventId));
+                                break;
+                            case 'what':
+                                dependencies.push(new ThingDependency(ctrl.sgEvent.id,eventId));
+                        }
                     });
                     return $modalInstance.close(dependencies);
                     //if (editMode) {
