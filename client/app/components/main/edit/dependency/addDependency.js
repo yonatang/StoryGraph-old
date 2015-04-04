@@ -3,10 +3,9 @@
 
     angular.module('sg.main')
         .controller('AddDependencyController', ['$modalInstance', 'storyGraphService', 'sgEvent', 'profile',
-            'TimeDependency', 'LocationDependency', 'CharacterDependency', 'ThingDependency', '$scope',
+            'TimeDependency', 'LocationDependency', 'CharacterDependency', 'ThingDependency',
             function ($modalInstance, storyGraphService, sgEvent, profile, TimeDependency,
-                      LocationDependency, CharacterDependency, ThingDependency,
-                      $scope) {
+                      LocationDependency, CharacterDependency, ThingDependency) {
                 var ctrl = this;
                 ctrl.events = storyGraphService.events;
                 ctrl.sgEvent = sgEvent;
