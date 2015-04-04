@@ -1,5 +1,9 @@
 (function (angular, undefined) {
     'use strict';
+
+    var staticEnhencment = function (DepObject) {
+        DepObject.operators = DepObject.prototype.operators;
+    };
     angular.module('sg.model')
         .factory('Dependency', [function () {
             function Dependency(type, fromEventId, toEventId) {
@@ -34,6 +38,7 @@
                         }
                     }
                 });
+                staticEnhencment(TimeDependency);
                 TimeDependency.prototype.constructor = TimeDependency;
                 return TimeDependency;
 
@@ -53,6 +58,7 @@
                         }
                     }
                 });
+                staticEnhencment(LocationDependency);
                 LocationDependency.prototype.constructor = LocationDependency;
                 return LocationDependency;
 
@@ -72,6 +78,7 @@
                         }
                     }
                 });
+                staticEnhencment(CharacterDependency);
                 CharacterDependency.prototype.constructor = CharacterDependency;
                 return CharacterDependency;
 
@@ -91,6 +98,7 @@
                         }
                     }
                 });
+                staticEnhencment(ThingDependency);
                 ThingDependency.prototype.constructor = ThingDependency;
                 return ThingDependency;
 

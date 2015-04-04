@@ -19,7 +19,9 @@
 
         <div class="form-group">
             <label>Choose type</label>
-            <select ng-model="ctrl.type"
+            <select class="form-control"
+                    ng-model="ctrl.type"
+                    ng-change="ctrl.changeType()"
                     required>
                 <option value="when">When</option>
                 <option value="where">Where</option>
@@ -27,43 +29,24 @@
                 <option value="who">Who</option>
             </select>
         </div>
+
+        <div class="form-group"
+             ng-if="ctrl.operators">
+            <label>Choose operator</label>
+            <select class="form-control"
+                    ng-model="ctrl.operator"
+                    ng-options="operator as operator.name for (id , operator) in ctrl.operators"
+                    required>
+            </select>
+        </div>
     </form>
-    <!--<form name="constraintEditForm">-->
-    <!--<div ng-if="ctrl.page==1">-->
-    <!--<div class="form-group">-->
-    <!--<label>Type</label>-->
-    <!--<select class="form-control"-->
-    <!--ng-model="ctrl.type">-->
-    <!--<option value="where">Where</option>-->
-    <!--<option value="when">When</option>-->
-    <!--<option value="who">Who</option>-->
-    <!--<option value="what">What</option>-->
-    <!--</select>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div ng-if="ctrl.page==2">-->
-    <!--<ng-include src="'/components/main/edit/constraint/addConstraint-'+ctrl.type+'.tpl.html'"></ng-include>-->
-    <!--</div>-->
-    <!--</form>-->
 
 </div>
 <div class="modal-footer">
-    <button class="btn btn-default" ng-click="ctrl.ok()">OK
+    <button class="btn btn-default"
+            ng-disabled="dependencyEditForm.$invalid || ctrl.isFormInvalid()"
+            ng-click="ctrl.ok()">OK
     </button>
-    <!--<button class="btn btn-info"-->
-    <!--ng-click="ctrl.next()"-->
-    <!--ng-disabled="!ctrl.type"-->
-    <!--ng-if="ctrl.page==1">Next-->
-    <!--</button>-->
-    <!--<button class="btn btn-info"-->
-    <!--ng-click="ctrl.back()"-->
-    <!--ng-if="ctrl.page==2 && !ctrl.editMode">Back-->
-    <!--</button>-->
-    <!--<button class="btn btn-primary"-->
-    <!--ng-if="ctrl.page==2"-->
-    <!--ng-click="ctrl.ok()"-->
-    <!--ng-disabled="constraintEditForm.$invalid || !ctrl.constraint.valid">OK-->
-    <!--</button>-->
     <button class="btn btn-warning"
             ng-click="ctrl.cancel()">Cancel
     </button>

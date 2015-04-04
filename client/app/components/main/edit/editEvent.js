@@ -23,9 +23,9 @@
                         });
                 };
                 ctrl.addDependency = function () {
-                    addEditDependency(ctrl.sgEvent, null, storyGraphService.profile).result
+                    addEditDependency(ctrl.sgEvent, storyGraphService.profile).result
                         .then(function (dependencies) {
-                            console.log('adding dependencies', dependencies);
+                            //TODO keep action for commit at the save of the form
                             angular.forEach(dependencies, function (dependency) {
                                 storyGraphService.addDependency(dependency);
                             });

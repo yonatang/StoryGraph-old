@@ -2,89 +2,67 @@
     'use strict';
 
     angular.module('sg.main')
-        .controller('AddDependencyController', ['$modalInstance', 'storyGraphService', 'sgEvent', 'dependency', 'profile',
-            'TimeDependency', 'LocationDependency', 'CharacterDependency', 'ThingDependency',
-            function ($modalInstance, storyGraphService, sgEvent, dependency, profile, TimeDependency,
-            LocationDependency, CharacterDependency, ThingDependency) {
+        .controller('AddDependencyController', ['$modalInstance', 'storyGraphService', 'sgEvent', 'profile',
+            'TimeDependency', 'LocationDependency', 'CharacterDependency', 'ThingDependency', '$scope',
+            function ($modalInstance, storyGraphService, sgEvent, profile, TimeDependency,
+                      LocationDependency, CharacterDependency, ThingDependency,
+                      $scope) {
                 var ctrl = this;
-                //var originalDependency = dependency;
-                var editMode = ctrl.editMode = !!dependency;
-
                 ctrl.events = storyGraphService.events;
                 ctrl.sgEvent = sgEvent;
                 ctrl.targetEvents = [];
-                //ctrl.storyGraphService = storyGraphService;
-                ctrl.type = editMode ? dependency.name : null;
-                ctrl.page = editMode ? 2 : 1;
-                //ctrl.next = function () {
-                //    ctrl.page++;
-                //    var AbsConstructor;
-                //    switch (ctrl.type) {
-                //        case 'where':
-                //            AbsConstructor = LocationConstraint;
-                //            break;
-                //        case 'when':
-                //            AbsConstructor = TimeConstraint;
-                //            break;
-                //        case 'who':
-                //            AbsConstructor = CharacterConstraint;
-                //            break;
-                //        case 'what':
-                //            AbsConstructor = ThingConstraint;
-                //
-                //            break;
-                //    }
-                //    ctrl.constraint = new AbsConstructor(profile);
-                //};
-                //ctrl.back = function(){
-                //    ctrl.page--;
-                //    ctrl.constraint = null;
-                //};
-                ctrl.dependency = new TimeDependency(); //editMode ? dependency.clone() : null;
+                ctrl.type = null;
+                var DependencyObject = null;
+                ctrl.operators = null;
+                ctrl.operator = null;
+                ctrl.changeType = function () {
+                    switch (ctrl.type) {
+                        case 'who':
+                            DependencyObject = CharacterDependency;
+                            break;
+                        case 'where':
+                            DependencyObject = LocationDependency;
+                            break;
+                        case 'when':
+                            DependencyObject = TimeDependency;
+                            break;
+                        case 'what':
+                            DependencyObject = ThingDependency;
+                            break;
+                        default:
+                            DependencyObject = null;
+                    }
+                    ctrl.operators = DependencyObject.operators;
+                    ctrl.operator = null;
+                };
                 ctrl.cancel = function () {
                     return $modalInstance.dismiss();
                 };
+                ctrl.isFormInvalid = function () {
+                    return ctrl.targetEvents.length === 0;
+                };
                 ctrl.ok = function () {
                     var dependencies = [];
-                    angular.forEach(ctrl.targetEvents, function(eventId){
-                        switch (ctrl.type){
-                            case 'when':
-                                dependencies.push(new TimeDependency(ctrl.sgEvent.id,eventId));
-                                break;
-                            case 'where':
-                                dependencies.push(new LocationDependency(ctrl.sgEvent.id,eventId));
-                                break;
-                            case 'who':
-                                dependencies.push(new CharacterDependency(ctrl.sgEvent.id,eventId));
-                                break;
-                            case 'what':
-                                dependencies.push(new ThingDependency(ctrl.sgEvent.id,eventId));
-                        }
+                    angular.forEach(ctrl.targetEvents, function (eventId) {
+                        var dependency = new DependencyObject(ctrl.sgEvent.id, eventId);
+                        dependency.operator = dependency.operators[ctrl.operator.id];
+                        dependencies.push(dependency);
                     });
                     return $modalInstance.close(dependencies);
-                    //if (editMode) {
-                    //    originalDependency.mergeWith(ctrl.dependency);
-                    //} else {
-                    //    originalDependency = ctrl.dependency;
-                    //}
-                    //return $modalInstance.close(originalDependency);
                 };
             }])
         .factory('addEditDependency', ['$modal', function ($modal) {
-            return function (sgEvent, dependency, profile) {
+            return function (sgEvent, profile) {
                 var modalInstance = $modal.open({
                     templateUrl: '/components/main/edit/dependency/addDependency.tpl.html',
                     controller: 'AddDependencyController as ctrl',
                     backdrop: true,
                     size: 'sm',
                     resolve: {
-                        dependency: function () {
-                            return dependency;
-                        },
-                        sgEvent : function(){
+                        sgEvent: function () {
                             return sgEvent;
                         },
-                        profile: function(){
+                        profile: function () {
                             return profile;
                         }
                     }
