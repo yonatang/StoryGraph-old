@@ -38,8 +38,6 @@
                     type = dependencyObj.type;
 
                 _graph.setEdge(v, w, dependencyObj, type);
-                console.log(_graph.nodes());
-                console.log(_graph.edges());
                 refreshDataStructure();
             };
 

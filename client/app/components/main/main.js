@@ -49,7 +49,6 @@
                 ctrl.edgeToRemove = null;
             };
             ctrl.removeSelected = function () {
-                console.log(storyGraphService.state.selectedEvents);
                 storyGraphService.removeEvent(storyGraphService.state.selectedEvents);
             };
 

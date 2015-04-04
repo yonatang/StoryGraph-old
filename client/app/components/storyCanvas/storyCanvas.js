@@ -19,7 +19,6 @@
                             storyGraphService.deselectAll();
                         };
                         scope.addNewEvent = function(event){
-                            console.log(event);
                             event.stopPropagation();
                             event.preventDefault();
                             storyGraphService.addNewEvent(event.offsetX, event.offsetY);
