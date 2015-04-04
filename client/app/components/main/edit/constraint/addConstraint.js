@@ -1,32 +1,27 @@
 (function (angular, $, undefined) {
     'use strict';
 
-    //Array.find polifill
-    if (!Array.prototype.find) {
-        Array.prototype.find = function(predicate) {
-            if (this === null) {
-                throw new TypeError('Array.prototype.find called on null or undefined');
-            }
-            if (typeof predicate !== 'function') {
-                throw new TypeError('predicate must be a function');
-            }
-            var list = Object(this);
-            /*jshint bitwise: false */
-            var length = list.length >>> 0;
-            /*jshint bitwise: true */
-            var thisArg = arguments[1];
-            var value;
+    var find = function(arr, predicate){
+        if (arr === null) {
+            throw new TypeError('Array.prototype.find called on null or undefined');
+        }
+        if (typeof predicate !== 'function') {
+            throw new TypeError('predicate must be a function');
+        }
+        var list = Object(arr);
+        /*jshint bitwise: false */
+        var length = list.length >>> 0;
+        /*jshint bitwise: true */
+        var value;
 
-            for (var i = 0; i < length; i++) {
-                value = list[i];
-                if (predicate.call(thisArg, value, i, list)) {
-                    return value;
-                }
+        for (var i = 0; i < length; i++) {
+            value = list[i];
+            if (predicate.call(arr, value, i, list)) {
+                return value;
             }
-            return undefined;
-        };
-    }
-
+        }
+        return undefined;
+    };
 
     angular.module('sg.main')
         .controller('AddConstraintController', ['$modalInstance', 'constraint', 'profile',
@@ -76,7 +71,8 @@
                     return $modalInstance.close(originalConstraint);
                 };
                 ctrl.valueExists = function(text){
-                    var v=!!ctrl.constraint.value.find(function(e){return e.id===text;});
+
+                    var v=!!find(ctrl.constraint.value, function(e){return e.id===text;});
                     return v;
                 };
 
