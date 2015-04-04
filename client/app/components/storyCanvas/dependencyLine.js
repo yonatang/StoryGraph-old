@@ -35,7 +35,9 @@
     }
 
     function getConnectionCords(e1, e2, type) {
-
+        if (!e1 || !e2){
+            return {x:0,y:0};
+        }
         var x = e1.x, y = e1.y;
         switch (getConnectionDirection(e1, e2)) {
             //e2 is above

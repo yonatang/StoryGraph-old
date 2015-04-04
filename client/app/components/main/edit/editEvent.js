@@ -9,11 +9,16 @@
                 ctrl.sgEvent = sgEvent.clone();
                 ctrl.inDeps = storyGraphService.eventDeps[sgEvent.id].inDeps;
                 ctrl.outDeps = storyGraphService.eventDeps[sgEvent.id].outDeps;
+                ctrl.uncommittedDeps = [];
                 ctrl.cancel = function () {
                     return $modalInstance.dismiss();
                 };
                 ctrl.ok = function () {
                     originalEvent.mergeWith(ctrl.sgEvent);
+                    angular.forEach(ctrl.uncommittedDeps, function (dependency) {
+                        storyGraphService.addDependency(dependency);
+                    });
+                    ctrl.uncommittedDeps=[];
                     return $modalInstance.close();
                 };
                 ctrl.addConstraint = function () {
@@ -25,11 +30,22 @@
                 ctrl.addDependency = function () {
                     addEditDependency(ctrl.sgEvent, storyGraphService.profile).result
                         .then(function (dependencies) {
-                            //TODO keep action for commit at the save of the form
-                            angular.forEach(dependencies, function (dependency) {
-                                storyGraphService.addDependency(dependency);
-                            });
+                            ctrl.uncommittedDeps = ctrl.uncommittedDeps.concat(dependencies);
+                            //TODO resolve conflicts in uncomitted dependencies
                         });
+                };
+                ctrl.removeUncomittedDep = function(dep){
+                    var idx=ctrl.uncommittedDeps.indexOf(dep);
+                    if (idx>-1){
+                        ctrl.uncommittedDeps.splice(idx,1);
+                    }
+                };
+                ctrl.getEventName = function (eventId) {
+                    var event = storyGraphService.getEventById(eventId);
+                    if (event) {
+                        return event.name;
+                    }
+                    return '';
                 };
                 ctrl.removeConstraint = function (constraint) {
                     var constraints = ctrl.sgEvent.constraints;

@@ -46,24 +46,39 @@
                 </button>
             </tab>
             <tab heading="Dependencies">
-                <table>
+                <table class="table">
                     <thead>
                     <tr>
                         <th>Type</th>
                         <th>Operator</th>
-                        <th>Details</th>
+                        <th>Other Event</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
+                    <!--TODO instead of the confusing in/out dependencies - inverase the state of the
+                    inversiable dependencies (i.e. time dependency)-->
+                    <!--TODO resolve conflicts with uncomitted dependencies -->
+                    <!--TODO allow removal of dependencies with commit mechanism -->
                     <tr ng-repeat="outDep in ctrl.outDeps">
-                        <td>{{outDep.name}} (out)</td>
-                        <td>??</td>
-                        <td>??</td>
+                        <td>{{outDep.type}} (out)</td>
+                        <td>{{outDep.operator.name}}</td>
+                        <td>{{ctrl.getEventName(outDep.toEventId)}}</td>
+                    </tr>
+                    <tr ng-repeat="outDep in ctrl.uncommittedDeps">
+                        <td>{{outDep.type}} (out)</td>
+                        <td>{{outDep.operator.name}}</td>
+                        <td>{{ctrl.getEventName(outDep.toEventId)}}</td>
+                        <td><a href
+                               ng-click="ctrl.removeUncomittedDep(outDep)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                        </td>
                     </tr>
                     <tr ng-repeat="inDep in ctrl.inDeps">
-                        <td>{{inDep.name}} (in)</td>
-                        <td>??</td>
-                        <td>??</td>
+                        <td>{{inDep.type}} (in)</td>
+                        <td>{{inDep.operator.name}}</td>
+                        <td>{{ctrl.getEventName(inDep.fromEventId)}}</td>
                     </tr>
                     </tbody>
                 </table>
