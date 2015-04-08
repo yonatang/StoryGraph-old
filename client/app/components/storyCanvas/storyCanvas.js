@@ -15,6 +15,9 @@
                         scope.getSgEvent = function(){
                             return storyGraphService.state.selectedEvents[0];
                         };
+                        scope.getDependency = function(){
+                            return storyGraphService.state.selectedDependencies[0];
+                        };
                         scope.deselectAll = function(){
                             storyGraphService.deselectAll();
                         };

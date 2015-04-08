@@ -15,16 +15,21 @@
     //https://github.com/cpettitt/graphlib
     angular.module('sg.services').service('storyGraphService', [
         'sg.profiles', 'StoryEvent',
-        function (profiles,StoryEvent) {
+        function (profiles, StoryEvent) {
             if (!window.graphlib) {
                 throw new Error('Missing graphlib');
             }
             var _graph = new window.graphlib.Graph({multigraph: true}),
                 _id = 0,
-                _state = {selectedEvents : []},
+                _state = {selectedEvents: [], selectedDependencies: []},
                 _nodes = [],
                 _edges = [],
                 _eventEdges = {};
+            Object.defineProperty(_state, 'numSelected', {
+                get: function () {
+                    return this.selectedEvents.length + this.selectedDependencies.length;
+                }
+            });
 
             this.addNewEvent = function (x, y) {
                 _id++;
@@ -46,26 +51,30 @@
                     console.error('trying to remove null event');
                     return;
                 }
-                if (!angular.isArray(events)){
-                    events=[events];
+                if (!angular.isArray(events)) {
+                    events = [events];
                 } else {
                     events = [].concat(events);
                 }
-                angular.forEach(events, function(event){
+                angular.forEach(events, function (event) {
                     _graph.removeNode(event.id);
-                    var idx=_state.selectedEvents.indexOf(event);
-                    if (idx>-1){
-                        _state.selectedEvents.splice(idx,1);
+                    var idx = _state.selectedEvents.indexOf(event);
+                    if (idx > -1) {
+                        _state.selectedEvents.splice(idx, 1);
                     }
                 });
                 refreshDataStructure();
             };
 
-            this.deselectAll = function (){
-                angular.forEach(_state.selectedEvents, function(node){
-                    node.selected=false;
+            var deselectAll = this.deselectAll = function () {
+                angular.forEach(_nodes, function (node) {
+                    node.selected = false;
+                });
+                angular.forEach(_edges, function (edge) {
+                    edge.selected = false;
                 });
                 _state.selectedEvents = [];
+                _state.selectedDependencies = [];
             };
 
             this.getEventById = function (eventId) {
@@ -74,31 +83,65 @@
 
             this.selectEvent = function (event, append) {
                 if (!append) {
-                    angular.forEach(_nodes, function (node) {
-                        node.selected = false;
-                    });
-                    _state.selectedEvents = [];
+                    deselectAll();
                 }
-                event.selected = true;
-                _state.selectedEvents.push(event);
+                if (append && event.selected) {
+                    event.selected = false;
+                    var idx = _state.selectedEvents.indexOf(event);
+                    if (idx > -1) {
+                        _state.selectedEvents.splice(idx, 1);
+                    }
+                } else {
+                    event.selected = true;
+                    _state.selectedEvents.push(event);
+                }
             };
 
-            this.removeDependency = function (dependency) {
-                if (!dependency) {
+            this.selectDependency = function (dependency, append) {
+                if (!append) {
+                    deselectAll();
+                }
+                if (append && dependency.selected) {
+                    dependency.selected = false;
+                    var idx = _state.selectedDependencies.indexOf(dependency);
+                    if (idx > -1) {
+                        _state.selectedDependencies.splice(idx, 1);
+                    }
+                } else {
+                    dependency.selected = true;
+                    _state.selectedDependencies.push(dependency);
+                }
+            };
+
+            this.removeDependency = function (dependencies) {
+                if (!dependencies) {
                     console.error('trying to remove null dependency');
                     return;
                 }
-                _graph.removeEdge(dependency.event1Id, dependency.event2Id, dependency.type);
+                if (!angular.isArray(dependencies)) {
+                    dependencies = [dependencies];
+                } else {
+                    dependencies = [].concat(dependencies);
+                }
+                angular.forEach(dependencies, function (dependency) {
+                    _graph.removeEdge(dependency.fromEventId, dependency.toEventId, dependency.type);
+                    var idx = _state.selectedDependencies.indexOf(dependency);
+                    if (idx > -1) {
+                        _state.selectedDependencies.splice(idx, 1);
+                    }
+                });
                 refreshDataStructure();
             };
 
             var refreshDataStructure = function () {
                 _nodes.splice(0);
                 _edges.splice(0);
-                Object.keys(_eventEdges).forEach(function(key){ delete _eventEdges[key]; });
-                var init=function(node){
-                    if (!_eventEdges[node]){
-                        _eventEdges[node] = { inDeps : [], outDeps : [] };
+                Object.keys(_eventEdges).forEach(function (key) {
+                    delete _eventEdges[key];
+                });
+                var init = function (node) {
+                    if (!_eventEdges[node]) {
+                        _eventEdges[node] = {inDeps: [], outDeps: []};
                     }
                 };
 

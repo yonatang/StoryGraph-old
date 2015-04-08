@@ -35,8 +35,8 @@
     }
 
     function getConnectionCords(e1, e2, type) {
-        if (!e1 || !e2){
-            return {x:0,y:0};
+        if (!e1 || !e2) {
+            return {x: 0, y: 0};
         }
         var x = e1.x, y = e1.y;
         switch (getConnectionDirection(e1, e2)) {
@@ -69,14 +69,17 @@
                     scope: {
                         dep: '=sgDependency'
                     },
-                    template: '<line ' +
-                    'ng-attr-x1="{{getE1().x}}" ng-attr-y1="{{getE1().y}}" ' +
-                    'ng-attr-x2="{{getE2().x}}" ng-attr-y2="{{getE2().y}}" ' +
-                    'class="dep-class" ' +
-                    'ng-class="cssStyle" />',
+                    templateUrl: '/components/storyCanvas/dependencyLine.tpl.html',
                     link: function (scope) {
                         var dependency = scope.dep,
                             e1, e2;
+
+                        scope.select = function (event) {
+                            var append = event.shiftKey;
+                            storyGraphService.selectDependency(dependency, append);
+                            event.stopPropagation();
+                            event.preventDefault();
+                        };
 
                         scope.getE1 = function () {
                             return getConnectionCords(e1, e2, dependency.type);
@@ -84,8 +87,13 @@
                         scope.getE2 = function () {
                             return getConnectionCords(e2, e1, dependency.type);
                         };
-                        scope.$watch('dep.type', function (type) {
+                        scope.$watchGroup(['dep.type', 'dep.selected'], function (values) {
+                            var type = values[0],
+                                selected = values[1];
                             scope.cssStyle = 'dep-class-' + type;
+                            if (selected) {
+                                scope.cssStyle += ' selected';
+                            }
                         });
                         scope.$watch('dep.fromEventId', function (e1Id) {
                             e1 = storyGraphService.getEventById(e1Id);

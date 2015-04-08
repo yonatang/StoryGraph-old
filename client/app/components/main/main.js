@@ -25,13 +25,17 @@
             ctrl.profile = storyGraphService.profile;
 
             ctrl.canDelete = function () {
-                return ctrl.state.selectedEvents.length > 0;
+                return ctrl.state.numSelected > 0;
             };
             ctrl.canEdit = function () {
-                return ctrl.state.selectedEvents.length === 1;
+                return ctrl.state.numSelected === 1;
             };
             ctrl.edit = function () {
-                editEvent(ctrl.state.selectedEvents[0]);
+                if (ctrl.state.selectedEvents.length === 1) {
+                    editEvent(ctrl.state.selectedEvents[0]);
+                } else {
+                    //TODO editDependency(ctrl.state.selectedDependencies[0]);
+                }
             };
             ctrl.addEvent = function () {
                 storyGraphService.addNewEvent(10 + Math.random() * 100, 10 + Math.random() * 100);
@@ -50,6 +54,7 @@
             };
             ctrl.removeSelected = function () {
                 storyGraphService.removeEvent(storyGraphService.state.selectedEvents);
+                storyGraphService.removeDependency(storyGraphService.state.selectedDependencies);
             };
 
             ctrl.helpText =

@@ -87,8 +87,12 @@ svg {
     .selected {
         fill: yellow;
     }
+    line.selected {
+        stroke-width: 4;
+    }
     .dep-class {
         stroke-width:2;
+        cursor: pointer;
     }
 
     .dep-class-who {
