@@ -76,7 +76,7 @@
                     <li ng-repeat="dependency in state.selectedDependencies">
                         {{dependency.fromEventId}}
                         <span class="glyphicon glyphicon-arrow-right"></span>
-                        {{dependency.toEventId}}: {{getDependency().type}} - {{getDependency().operator.name}}
+                        {{dependency.toEventId}}: {{dependency.type}} - {{dependency.operator.name}}
                     </li>
                 </ul>
             </div>
