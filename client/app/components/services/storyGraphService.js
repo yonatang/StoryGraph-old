@@ -16,6 +16,7 @@
     angular.module('sg.services').service('storyGraphService', [
         'sg.profiles', 'StoryEvent',
         function (profiles, StoryEvent) {
+            var that = this;
             if (!window.graphlib) {
                 throw new Error('Missing graphlib');
             }
@@ -164,6 +165,15 @@
             this.eventDeps = _eventEdges;
             this.dependencies = _edges;
             this.profile = profiles[0];
+
+            this.export = function () {
+                var graph = {
+                    nodes: [].concat(_nodes),
+                    edges: [].concat(_edges),
+                    profile: that.profile
+                };
+                return graph;
+            }
 
         }]);
 
