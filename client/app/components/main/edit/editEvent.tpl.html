@@ -59,11 +59,16 @@
                     <!--TODO instead of the confusing in/out dependencies - inverase the state of the
                     inversiable dependencies (i.e. time dependency)-->
                     <!--TODO resolve conflicts with uncomitted dependencies -->
-                    <!--TODO allow removal of dependencies with commit mechanism -->
-                    <tr ng-repeat="outDep in ctrl.outDeps">
+                    <tr ng-repeat="outDep in ctrl.outDeps"
+                        ng-if="!outDep.removed">
                         <td>{{outDep.type}} (out)</td>
                         <td>{{outDep.operator.name}}</td>
                         <td>{{ctrl.getEventName(outDep.toEventId)}}</td>
+                        <td><a href
+                               ng-click="ctrl.removePersistedDependency(outDep)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                        </td>
                     </tr>
                     <tr ng-repeat="outDep in ctrl.uncommittedDeps">
                         <td>{{outDep.type}} (out)</td>
@@ -75,10 +80,16 @@
                         </a>
                         </td>
                     </tr>
-                    <tr ng-repeat="inDep in ctrl.inDeps">
+                    <tr ng-repeat="inDep in ctrl.inDeps"
+                        ng-if="!inDep.removed">
                         <td>{{inDep.type}} (in)</td>
                         <td>{{inDep.operator.name}}</td>
                         <td>{{ctrl.getEventName(inDep.fromEventId)}}</td>
+                        <td><a href
+                               ng-click="ctrl.removePersistedDependency(inDep)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

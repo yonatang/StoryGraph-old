@@ -6,6 +6,7 @@
         <div class="form-group">
             <label>Choose Target Events</label>
 
+            <!-- show all other events -->
             <div class="checkbox"
                  ng-repeat="event in ctrl.events | filter: {id: '!'+ctrl.sgEvent.id}">
                 <label>

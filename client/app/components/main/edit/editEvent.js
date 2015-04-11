@@ -1,24 +1,26 @@
 (function (angular, undefined) {
     'use strict';
     angular.module('sg.main')
-        .controller('EditEventController', ['$modalInstance', 'sgEvent', 'addEditConstraint',
+        .controller('EditEventController', ['$scope', '$modalInstance', 'sgEvent', 'addEditConstraint',
             'addEditDependency', 'storyGraphService',
-            function ($modalInstance, sgEvent, addEditConstraint, addEditDependency, storyGraphService) {
+            function ($scope, $modalInstance, sgEvent, addEditConstraint, addEditDependency, storyGraphService) {
                 var ctrl = this;
                 var originalEvent = sgEvent;
                 ctrl.sgEvent = sgEvent.clone();
                 ctrl.inDeps = storyGraphService.eventDeps[sgEvent.id].inDeps;
                 ctrl.outDeps = storyGraphService.eventDeps[sgEvent.id].outDeps;
                 ctrl.uncommittedDeps = [];
+                ctrl.uncommittedRemovals = [];
                 ctrl.cancel = function () {
                     return $modalInstance.dismiss();
                 };
                 ctrl.ok = function () {
                     originalEvent.mergeWith(ctrl.sgEvent);
+                    storyGraphService.removeDependency(ctrl.uncommittedRemovals);
                     angular.forEach(ctrl.uncommittedDeps, function (dependency) {
                         storyGraphService.addDependency(dependency);
                     });
-                    ctrl.uncommittedDeps=[];
+
                     return $modalInstance.close();
                 };
                 ctrl.addConstraint = function () {
@@ -34,11 +36,15 @@
                             //TODO resolve conflicts in uncomitted dependencies
                         });
                 };
-                ctrl.removeUncomittedDep = function(dep){
-                    var idx=ctrl.uncommittedDeps.indexOf(dep);
-                    if (idx>-1){
-                        ctrl.uncommittedDeps.splice(idx,1);
+                ctrl.removeUncomittedDep = function (dep) {
+                    var idx = ctrl.uncommittedDeps.indexOf(dep);
+                    if (idx > -1) {
+                        ctrl.uncommittedDeps.splice(idx, 1);
                     }
+                };
+                ctrl.removePersistedDependency = function (dep) {
+                    ctrl.uncommittedRemovals.push(dep);
+                    dep.removed = true;
                 };
                 ctrl.getEventName = function (eventId) {
                     var event = storyGraphService.getEventById(eventId);
@@ -54,9 +60,16 @@
                         constraints.splice(idx, 1);
                     }
                 };
+
                 ctrl.editConstraint = function (constraint) {
                     addEditConstraint(constraint, null);
                 };
+                $scope.$on('$destroy', function () {
+                    ctrl.uncommittedDeps = [];
+                    angular.forEach(ctrl.uncommittedRemovals, function (dep) {
+                        delete dep.removed;
+                    });
+                });
 
             }])
         .factory('editEvent', ['$modal', function ($modal) {
