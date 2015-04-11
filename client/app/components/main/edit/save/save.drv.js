@@ -4,8 +4,8 @@
         function ($document, $window, $timeout, storyGraphService) {
             return {
                 restrict: 'AC',
-                link: function ($scope, element, attrs) {
-                    $scope.getFilename = function () {
+                link: function (scope, element /*, attrs*/) {
+                    scope.getFilename = function () {
                         return 'story.json';
                     };
                     function doClick() {
@@ -21,7 +21,7 @@
 
                             var downloadLink = angular.element('<a></a>');
                             downloadLink.attr('href', window.URL.createObjectURL(blob));
-                            downloadLink.attr('download', $scope.getFilename());
+                            downloadLink.attr('download', scope.getFilename());
                             downloadLink.attr('target', '_blank');
 
                             $document.find('body').append(downloadLink);
@@ -32,8 +32,8 @@
                         }
                     }
 
-                    element.bind('click', function (e) {
-                        $scope.$apply(function () {
+                    element.bind('click', function (/*e*/) {
+                        scope.$apply(function () {
                             doClick();
                         });
                     });

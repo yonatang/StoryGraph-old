@@ -173,7 +173,7 @@
                     profile: that.profile
                 };
                 return graph;
-            }
+            };
 
         }]);
 
