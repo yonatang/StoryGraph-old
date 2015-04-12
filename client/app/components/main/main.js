@@ -56,8 +56,8 @@
                 storyGraphService.removeEvent(storyGraphService.state.selectedEvents);
                 storyGraphService.removeDependency(storyGraphService.state.selectedDependencies);
             };
-            ctrl.fileSelected = function (files, event) {
-                if (!files || files.length==0){
+            ctrl.fileSelected = function (files/*, event*/) {
+                if (!files || files.length === 0) {
                     return false;
                 }
                 var reader = new FileReader();
