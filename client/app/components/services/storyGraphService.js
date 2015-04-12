@@ -195,7 +195,7 @@
                     var newConstraints = [];
                     var constraints = [].concat(newNode.constraints);
                     angular.forEach(constraints, function (constraint) {
-                        var Constraint = ConstraintFactory(constraint.type);
+                        var Constraint = ConstraintFactory.get(constraint.type);
                         var newConstraint = new Constraint();
                         newConstraint.mergeWith(constraint);
                         newConstraints.push(newConstraint);

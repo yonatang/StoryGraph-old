@@ -137,19 +137,22 @@
 
         .factory('ConstraintFactory', ['TimeConstraint', 'CharacterConstraint', 'LocationConstraint', 'ThingConstraint',
             function (TimeConstraint, CharacterConstraint, LocationConstraint, ThingConstraint) {
-                return function (type) {
-                    switch (type) {
-                        case 'when':
-                            return TimeConstraint;
-                        case 'where':
-                            return LocationConstraint;
-                        case 'who':
-                            return CharacterConstraint;
-                        case 'what':
-                            return ThingConstraint;
+                return {
+                    get: function (type) {
+                        switch (type) {
+                            case 'when':
+                                return TimeConstraint;
+                            case 'where':
+                                return LocationConstraint;
+                            case 'who':
+                                return CharacterConstraint;
+                            case 'what':
+                                return ThingConstraint;
+                        }
+                        return null;
                     }
-                    return null;
                 };
+
             }]);
 
 })(angular, jQuery);
