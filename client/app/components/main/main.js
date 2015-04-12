@@ -5,8 +5,8 @@
         'sg.services',
         'ngRoute'
     ]);
-    module.controller('MainController', ['$scope', 'storyGraphService', 'editEvent', 'buildData',
-        function ($scope, storyGraphService, editEvent, buildData) {
+    module.controller('MainController', ['$scope', '$window', 'storyGraphService', 'editEvent', 'buildData',
+        function ($scope, $window, storyGraphService, editEvent, buildData) {
             var ctrl = this;
             ctrl.buildData = buildData;
             console.log('buildData', buildData);
@@ -55,6 +55,28 @@
             ctrl.removeSelected = function () {
                 storyGraphService.removeEvent(storyGraphService.state.selectedEvents);
                 storyGraphService.removeDependency(storyGraphService.state.selectedDependencies);
+            };
+            ctrl.fileSelected = function (files, event) {
+                if (!files || files.length==0){
+                    return false;
+                }
+                var reader = new FileReader();
+                reader.onloadend = function (evt) {
+                    var json = evt.target.result;
+                    $scope.$apply(function () {
+                        try {
+                            var graph = angular.fromJson(json);
+                            storyGraphService.import(graph);
+                        } catch (e) {
+                            $window.alert('Error while parsing the json file!\n' + e);
+                        }
+                    });
+
+                };
+                reader.onerror = function () {
+                    $window.alert('Error while loading the file');
+                };
+                reader.readAsText(files[0]);
             };
 
             ctrl.helpText =

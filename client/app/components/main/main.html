@@ -7,9 +7,12 @@
                     <button type="button"
                             class="btn btn-default"
                             save-btn>Save</button>
-                    <button type="button"
+                    <button type="file"
                             class="btn btn-default"
-                            ng-disabled="true">Load</button>
+                            accept=".json"
+                            ng-accept="'application/json'"
+                            ng-file-select
+                            ng-file-change="ctrl.fileSelected($files, $event)">Load</button>
                 </div>
                 <div class="btn-group" role="group">
                     <button type="button"
@@ -50,7 +53,13 @@
             </div>
 
 
-            <sg-canvas></sg-canvas>
+            <div class="full-height"
+                 ng-file-drop
+                 drag-over-class="dragover"
+                 stop-propagation="true"
+                 ng-file-change="ctrl.fileSelected($files, $event)">
+                <sg-canvas></sg-canvas>
+            </div>
         </div>
     </div>
 

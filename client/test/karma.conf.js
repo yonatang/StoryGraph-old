@@ -33,6 +33,8 @@ module.exports = function (config) {
             'bower_components/graphlib/dist/graphlib.core.min.js',
             'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'bower_components/checklist-model/checklist-model.js',
+            'bower_components/ng-file-upload-shim/angular-file-upload-shim.js',
+            'bower_components/ng-file-upload/angular-file-upload.js',
             'bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'app/components/**/*.js',

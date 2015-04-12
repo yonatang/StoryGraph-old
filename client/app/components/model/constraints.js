@@ -28,7 +28,7 @@
                 valueNames: {
                     get: function () {
                         var arr = [];
-                        this.value.forEach(function(elem){
+                        this.value.forEach(function (elem) {
                             arr.push(elem.name);
                         });
                         return arr;
@@ -39,18 +39,18 @@
                         window.constOrg = this;
                         var cloned = new this.constructor(this.profile);
                         $.extend(cloned, this);
-                        cloned.value=[].concat(this.value);
+                        cloned.value = [].concat(this.value);
                         window.constClone = cloned;
                         return cloned;
                     }
                 },
                 mergeWith: {
-                    value: function(other){
-                        $.extend(this,other);
+                    value: function (other) {
+                        $.extend(this, other);
                     }
                 },
                 valid: {
-                    get: function(){
+                    get: function () {
                         return this.operator && this.value && this.value.length > 0;
                     }
                 }
@@ -83,7 +83,7 @@
         .factory('CharacterConstraint', ['Constraint', function (Constraint) {
             function CharacterConstraint(profile) {
                 Constraint.call(this, 'who', profile);
-                this.group=null;
+                this.group = null;
             }
 
             CharacterConstraint.prototype = Object.create(Constraint.prototype, {
@@ -133,6 +133,23 @@
             ThingConstraint.prototype.constructor = ThingConstraint;
 
             return ThingConstraint;
-        }]);
+        }])
+
+        .factory('ConstraintFactory', ['TimeConstraint', 'CharacterConstraint', 'LocationConstraint', 'ThingConstraint',
+            function (TimeConstraint, CharacterConstraint, LocationConstraint, ThingConstraint) {
+                return function (type) {
+                    switch (type) {
+                        case 'when':
+                            return TimeConstraint;
+                        case 'where':
+                            return LocationConstraint;
+                        case 'who':
+                            return CharacterConstraint;
+                        case 'what':
+                            return ThingConstraint;
+                    }
+                    return null;
+                };
+            }]);
 
 })(angular, jQuery);

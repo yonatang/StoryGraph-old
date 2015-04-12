@@ -14,8 +14,8 @@
 
     //https://github.com/cpettitt/graphlib
     angular.module('sg.services').service('storyGraphService', [
-        'sg.profiles', 'StoryEvent',
-        function (profiles, StoryEvent) {
+        'sg.profiles', 'StoryEvent', 'ConstraintFactory',
+        function (profiles, StoryEvent, ConstraintFactory) {
             var that = this;
             if (!window.graphlib) {
                 throw new Error('Missing graphlib');
@@ -26,6 +26,13 @@
                 _nodes = [],
                 _edges = [],
                 _eventEdges = {};
+
+            var clearState = function () {
+                _state.selectedEvents.splice(0);
+                _state.selectedEvents.splice(0);
+            };
+            clearState();
+
             Object.defineProperty(_state, 'numSelected', {
                 get: function () {
                     return this.selectedEvents.length + this.selectedDependencies.length;
@@ -167,12 +174,43 @@
             this.profile = profiles[0];
 
             this.export = function () {
-                var graph = {
-                    nodes: [].concat(_nodes),
-                    edges: [].concat(_edges),
+                var graph = angular.copy({
+                    graph: window.graphlib.json.write(_graph),
                     profile: that.profile
-                };
+                });
+                // clear selected nodes
+                angular.forEach(graph.graph.nodes, function (node) {
+                    delete node.value.selected;
+                });
                 return graph;
+            };
+            var reinstantiateGraph = function (nodes) {
+                //reinstantiate nodes
+                angular.forEach(nodes, function (nodeName) {
+                    var node = _graph.node(nodeName);
+                    var newNode = new StoryEvent();
+                    newNode.mergeWith(node);
+
+                    //reinstantiate constraints of the node
+                    var newConstraints = [];
+                    var constraints = [].concat(newNode.constraints);
+                    angular.forEach(constraints, function (constraint) {
+                        var Constraint = ConstraintFactory(constraint.type);
+                        var newConstraint = new Constraint();
+                        newConstraint.mergeWith(constraint);
+                        newConstraints.push(newConstraint);
+                    });
+                    newNode.constraints = newConstraints;
+                    _graph.setNode(newNode.id, newNode);
+                    _nodes.push(_graph.node(nodeName));
+                });
+            };
+            this.import = function (data) {
+                _graph = window.graphlib.json.read(data.graph);
+                reinstantiateGraph(_graph.nodes());
+                clearState();
+                refreshDataStructure();
+                that.profile = data.profile;
             };
 
         }]);

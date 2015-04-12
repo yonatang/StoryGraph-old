@@ -20,7 +20,8 @@
             'ngSanitize',
             'ngTouch',
             'ui.bootstrap',
-            'checklist-model'
+            'checklist-model',
+            'angularFileUpload'
         ]);
     //
     //.config(function ($routeProvider) {

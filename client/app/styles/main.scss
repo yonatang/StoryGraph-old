@@ -21,6 +21,9 @@ body, html {
 body {
   padding: 0;
 }
+div.dragover {
+    border: 5px dashed blue;
+}
 
 .modal-backdrop {
     height: 100%;
