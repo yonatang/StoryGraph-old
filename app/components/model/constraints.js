@@ -69,9 +69,14 @@
             TimeConstraint.prototype = Object.create(Constraint.prototype, {
                 operators: {value: singleValueOperator},
                 options: {
-                    get: function () {
-                        return this.profile.times;
-                    }
+                    value: [
+                        {id: 'early-morning', name: 'Early Morning'},
+                        {id: 'morning', name: 'Morning'},
+                        {id: 'afternoon', name: 'Afternoon'},
+                        {id: 'evening', name: 'Evening'},
+                        {id: 'night', name: 'Night'},
+                        {id: 'late-night', name: 'Late Night'}
+                    ]
                 }
             });
 
