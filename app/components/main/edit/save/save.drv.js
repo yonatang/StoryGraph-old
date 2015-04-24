@@ -10,7 +10,7 @@
                     };
                     function doClick() {
                         var charset = 'utf-8';
-                        var exportString = angular.toJson(storyGraphService.export());
+                        var exportString = angular.toJson(storyGraphService.export(), true);
                         var blob = new Blob([exportString], {
                             type: 'text/json;charset=' + charset + ';'
                         });
