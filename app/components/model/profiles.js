@@ -15,17 +15,18 @@
             {id:'ariels-grotto', name:'Ariel\'s Grotto'}
         ],
         characters: [
-            {id:'father', name:'Father', group:'family'},
-            {id:'mother', name:'Mother', group:'family'},
-            {id:'boy', name:'Boy', group:'family'},
-            {id:'girl', name:'Girl', group:'family'},
-            {id:'alice', name:'Alice', group:'disney'},
-            {id:'chip', name:'Chip', group:'disney'},
-            {id:'dale', name:'Dale', group:'disney'}
+            {id:'father', name:'Father', groups:['family']},
+            {id:'mother', name:'Mother', groups:['family']},
+            {id:'boy', name:'Boy', groups:['family']},
+            {id:'girl', name:'Girl', groups:['family']},
+            {id:'alice', name:'Alice', groups:['disney']},
+            {id:'chip', name:'Chip', groups:['disney','animal']},
+            {id:'dale', name:'Dale', groups:['disney','animal']}
         ],
         groups:[
             {id:'family', name:'Family'},
-            {id:'disney', name:'Disney\'s Charachter'}
+            {id:'disney', name:'Disney\'s Charachter'},
+            {id:'animal', name:'Animals'}
         ]
     };
 

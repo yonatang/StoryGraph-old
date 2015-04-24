@@ -76,6 +76,31 @@
                     return v;
                 };
 
+                ctrl.constraintWho = {
+                    groupFilter : function(option) {
+                        var group=ctrl.constraint.group.id;
+                        return (option.groups.indexOf(group)>-1);
+                    },
+                    selectAllInGroup : function(){
+                        var group=ctrl.constraint.group.id;
+                        angular.forEach(ctrl.constraint.options, function(option){
+                            var idx=ctrl.constraint.value.indexOf(option);
+                            if ((option.groups.indexOf(group)>-1) && (idx===-1)){
+                                ctrl.constraint.value.push(option);
+                            }
+                        });
+                    },
+                    deselectAllInGroup : function(){
+                        var group=ctrl.constraint.group.id;
+                        angular.forEach(ctrl.constraint.options, function(option){
+                            var idx=ctrl.constraint.value.indexOf(option);
+                            if ((option.groups.indexOf(group)>-1) && (idx>-1)){
+                                ctrl.constraint.value.splice(idx,1);
+                            }
+                        });
+                    }
+                };
+
             }])
         .factory('addEditConstraint', ['$modal', function ($modal) {
             return function (constraint, profile) {

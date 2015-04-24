@@ -54,8 +54,13 @@
         </div>
     </div>
 
+    <div class="input-group">
+        <a href ng-click="ctrl.constraintWho.selectAllInGroup()">Select All</a>
+        /
+        <a href ng-click="ctrl.constraintWho.deselectAllInGroup()">Deselect All</a>
+    </div>
     <div class="checkbox"
-         ng-repeat="(id, option) in ctrl.constraint.options | filter:{group: ctrl.constraint.group.id} | filter:{name:search}">
+         ng-repeat="(id, option) in ctrl.constraint.options | filter:ctrl.constraintWho.groupFilter | filter:{name:search}">
         <label>
             <input type="checkbox" checklist-model="ctrl.constraint.value" checklist-value="option">
             <span>{{option.name}}</span>
