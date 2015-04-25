@@ -98,6 +98,14 @@
                     <span>Add Dependency<span class="glyphicon glyphicon-plus"></span></span>
                 </button>
             </tab>
+            <tab heading="Event Text">
+                <div class="form-group">
+                    <label>Event Text</label>
+                    <textarea class="form-control"
+                              msd-elastic
+                              ng-model="ctrl.sgEvent.text"></textarea>
+                </div>
+            </tab>
         </tabset>
         Event raw data:
         <button class="btn btn-default"

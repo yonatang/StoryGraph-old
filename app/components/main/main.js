@@ -3,6 +3,7 @@
     var module = angular.module('sg.main', [
         'sg.storyCanvas',
         'sg.services',
+        'monospaced.elastic',
         'ngRoute'
     ]);
     module.controller('MainController', ['$scope', '$window', 'storyGraphService', 'editEvent', 'buildData',

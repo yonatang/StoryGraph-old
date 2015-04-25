@@ -9,6 +9,7 @@
                 this.selected = false;
                 this.name = name || 'Event ' + id;
                 this.constraints = [];
+                this.text = '';
             }
 
             StoryEvent.prototype = Object.create({}, {
@@ -23,6 +24,7 @@
                         var cloned = new StoryEvent(this.id, this.x, this.y);
                         cloned.selected = this.selected;
                         cloned.name = this.name;
+                        cloned.text = this.text;
                         angular.forEach(this.constraints, function (constraint) {
                             cloned.constraints.push(constraint.clone());
                         });

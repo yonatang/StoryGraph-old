@@ -35,6 +35,7 @@ module.exports = function (config) {
             'bower_components/checklist-model/checklist-model.js',
             'bower_components/ng-file-upload-shim/angular-file-upload-shim.js',
             'bower_components/ng-file-upload/angular-file-upload.js',
+            'bower_components/angular-elastic/elastic.js',
             'bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'app/components/**/*.js',
