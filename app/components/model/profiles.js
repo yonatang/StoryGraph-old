@@ -97,7 +97,7 @@
             {id: 'frontierland_stage_door_cafe', name: 'Stage door cafe'},
             {id: 'frontierland_the_golden_horseshoe', name: 'Golden horseshoe'},
             {id: 'main_street_usa_carnation_cafe', name: 'Carnation cafe'},
-            {id: 'main_street_usa_gibson_girl_ice_cream_parlor', name: 'Bibson ice cream parlor'},
+            {id: 'main_street_usa_gibson_girl_ice_cream_parlor', name: 'Gibson ice cream parlor'},
             {id: 'main_street_usa_jolly_holiday_bakery_cafe', name: 'Jolly holiday bakery'},
             {id: 'main_street_usa_main_street_cone_shop', name: 'Cone shop'},
             {id: 'main_street_usa_plaza_inn', name: 'Plaza inn'},
