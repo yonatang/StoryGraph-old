@@ -18,6 +18,11 @@ body, html {
 .full-height {
     height: 100%;
 }
+
+.scrollable-item-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
 body {
   padding: 0;
 }
