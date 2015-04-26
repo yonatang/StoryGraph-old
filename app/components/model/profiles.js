@@ -186,79 +186,79 @@
             {id: 'tomorrowland_starcade', name: 'Starcade'}
         ],
         characters: [
-            {id: 'father', name: 'Father', groups: ['family']},
-            {id: 'mother', name: 'Mother', groups: ['family']},
-            {id: 'boy', name: 'Boy', groups: ['family']},
-            {id: 'girl', name: 'Girl', groups: ['family']},
+            {id: 'father', name: 'Father', gender:'male', groups: ['family']},
+            {id: 'mother', name: 'Mother', gender:'female', groups: ['family']},
+            {id: 'boy', name: 'Boy', gender:'male', groups: ['family']},
+            {id: 'girl', name: 'Girl', gender:'female', groups: ['family']},
 
-            {id: 'mickeyMouse', name: 'Mickey', groups: ['disney']},
-            {id: 'minniMouse', name: 'Minni', groups: ['disney']},
-            {id: 'aliceInWonderland', name: 'Alice', groups: ['disney']},
-            {id: 'goofy', name: 'Goofy', groups: ['disney']},
-            {id: 'dumbo', name: 'Dumbo', groups: ['disney']},
-            {id: 'pluto', name: 'Pluto', groups: ['disney']},
-            {id: 'donnaldDuck', name: 'Donnald', groups: ['disney']},
-            {id: 'daisey', name: 'Daisey', groups: ['disney']},
-            {id: 'princessMerida', name: 'Merida', groups: ['disney', 'princess', 'brave']},
-            {id: 'princessMulan', name: 'Mulan', groups: ['disney', 'princess', 'mulan']},
-            {id: 'princessSnowWhite', name: 'Snow White', groups: ['disney', 'princess', 'snowWhite']},
-            {id: 'duffy', name: 'Duffy', groups: ['disney']},
-            {id: 'genie', name: 'Genie', groups: ['disney']},
-            {id: 'buckeyTheSquirell', name: 'Buckey The Squirell', groups: ['disney']},
+            {id: 'mickeyMouse', name: 'Mickey', gender:'male', groups: ['disney']},
+            {id: 'minniMouse', name: 'Minni', gender:'female', groups: ['disney']},
+            {id: 'aliceInWonderland', name: 'Alice', gender:'female', groups: ['disney']},
+            {id: 'goofy', name: 'Goofy', gender:'male', groups: ['disney']},
+            {id: 'dumbo', name: 'Dumbo', gender:'male', groups: ['disney']},
+            {id: 'pluto', name: 'Pluto', gender:'male', groups: ['disney']},
+            {id: 'donnaldDuck', name: 'Donnald', gender:'male', groups: ['disney']},
+            {id: 'daisey', name: 'Daisey', gender:'female', groups: ['disney']},
+            {id: 'princessMerida', name: 'Merida', gender:'female', groups: ['disney', 'princess', 'brave']},
+            {id: 'princessMulan', name: 'Mulan', gender:'female', groups: ['disney', 'princess', 'mulan']},
+            {id: 'princessSnowWhite', name: 'Snow White', gender:'female', groups: ['disney', 'princess', 'snowWhite']},
+            {id: 'duffy', name: 'Duffy', gender:'male', groups: ['disney']},
+            {id: 'genie', name: 'Genie', gender:'male', groups: ['disney']},
+            {id: 'buckeyTheSquirell', name: 'Bucky the Squirrel', gender:'male', groups: ['disney']},
 
             // lilo and stitch
-            {id: 'stitch', name: 'Stich', groups: ['disney', 'liloAndStitch']},
-            {id: 'lilo', name: 'Lilo', groups: ['disney', 'liloAndStitch']},
+            {id: 'stitch', name: 'Stich', gender:'male', groups: ['disney', 'liloAndStitch']},
+            {id: 'lilo', name: 'Lilo', gender:'female', groups: ['disney', 'liloAndStitch']},
 
             // the princess and the frog
-            {id: 'princessTiana', name: 'Tiana', groups: ['disney', 'princess', 'princessAndFrog']},
-            {id: 'princeNaveen', name: 'Naveen', groups: ['disney', 'prince', 'princessAndFrog']},
+            {id: 'princessTiana', name: 'Tiana', gender:'female', groups: ['disney', 'princess', 'princessAndFrog']},
+            {id: 'princeNaveen', name: 'Naveen', gender:'male', groups: ['disney', 'prince', 'princessAndFrog']},
 
             // the beauty and the beast
-            {id: 'princessBelle', name: 'Princess Belle', groups: ['disney', 'princess', 'beautyAndBeast']},
-            {id: 'princeAdamBeast', name: 'Adam Beast', groups: ['disney', 'prince', 'beautyAndBeast']},
+            {id: 'princessBelle', name: 'Princess Belle', gender:'female', groups: ['disney', 'princess', 'beautyAndBeast']},
+            {id: 'princeAdamBeast', name: 'Adam Beast', gender:'male', groups: ['disney', 'prince', 'beautyAndBeast']},
 
             // cinderella
-            {id: 'princessCinderella', name: 'Cinderella', groups: ['disney', 'princess', 'cinderella']},
-            {id: 'princeHenry', name: 'Henry', groups: ['disney', 'prince', 'cinderella']},
+            {id: 'princessCinderella', name: 'Cinderella', gender:'female', groups: ['disney', 'princess', 'cinderella']},
+            {id: 'princeHenry', name: 'Henry', gender:'male', groups: ['disney', 'prince', 'cinderella']},
 
             // sleeping beauty
-            {id: 'princessAurora', name: 'Aurora', groups: ['disney', 'princess', 'sleepingBeauty']},
-            {id: 'princePhillip', name: 'Phillip', groups: ['disney', 'prince', 'sleepingBeauty']},
+            {id: 'princessAurora', name: 'Aurora', gender:'female', groups: ['disney', 'princess', 'sleepingBeauty']},
+            {id: 'princePhillip', name: 'Phillip', gender:'male', groups: ['disney', 'prince', 'sleepingBeauty']},
 
             // little mermaid
-            {id: 'princessAriel', name: 'Ariel', groups: ['disney', 'princess', 'mermaid']},
-            {id: 'princeEric', name: 'Eric', groups: ['disney', 'prince', 'mermaid']},
+            {id: 'princessAriel', name: 'Ariel', gender:'female', groups: ['disney', 'princess', 'mermaid']},
+            {id: 'princeEric', name: 'Eric', gender:'male', groups: ['disney', 'prince', 'mermaid']},
 
             // Aladdin
-            {id: 'princessJasmine', name: 'Jasmine', groups: ['disney', 'princess', 'aladdin']},
-            {id: 'princeAladin', name: 'Aladin', groups: ['disney', 'prince', 'aladdin']},
+            {id: 'princessJasmine', name: 'Jasmine', gender:'female', groups: ['disney', 'princess', 'aladdin']},
+            {id: 'princeAladin', name: 'Aladin', gender:'male', groups: ['disney', 'prince', 'aladdin']},
 
             // Pocahontas
-            {id: 'princessPocahontas', name: 'Pocahontas', groups: ['disney', 'princess', 'pocahontas']},
-            {id: 'princeJohnSmith', name: 'John Smith', groups: ['disney', 'prince', 'pocahontas']},
+            {id: 'princessPocahontas', name: 'Pocahontas', gender:'female', groups: ['disney', 'princess', 'pocahontas']},
+            {id: 'princeJohnSmith', name: 'John Smith', gender:'male', groups: ['disney', 'prince', 'pocahontas']},
 
             // Tangled
-            {id: 'princessRapunzel', name: 'Rapunzel', groups: ['disney', 'princess', 'tangled']},
-            {id: 'princeFlynnRider', name: 'Flynn Rider', groups: ['disney', 'prince', 'tangled']},
+            {id: 'princessRapunzel', name: 'Rapunzel', gender:'female', groups: ['disney', 'princess', 'tangled']},
+            {id: 'princeFlynnRider', name: 'Flynn Rider', gender:'male', groups: ['disney', 'prince', 'tangled']},
 
             // pooh
-            {id: 'winnieThePooh', name: 'Winnie The Pooh', groups: ['disney', 'pooh']},
-            {id: 'piglet', name: 'Piglet', groups: ['disney', 'pooh']},
+            {id: 'winnieThePooh', name: 'Winnie The Pooh', gender:'male', groups: ['disney', 'pooh']},
+            {id: 'piglet', name: 'Piglet', gender:'male', groups: ['disney', 'pooh']},
 
             // toy story
-            {id: 'buzzLightYear', name: 'Buzz Lightyear', groups: ['disney', 'toyStory']},
-            {id: 'woody', name: 'Woody', groups: ['disney', 'toyStory']},
-            {id: 'jessie', name: 'Jessie', groups: ['disney', 'toyStory']},
+            {id: 'buzzLightYear', name: 'Buzz Lightyear', gender:'male', groups: ['disney', 'toyStory']},
+            {id: 'woody', name: 'Woody', gender:'male', groups: ['disney', 'toyStory']},
+            {id: 'jessie', name: 'Jessie', gender:'female', groups: ['disney', 'toyStory']},
 
             // peter pan
-            {id: 'peterPan', name: 'Peter Pan', groups: ['disney', 'peterPan']},
-            {id: 'tinkerbell', name: 'Tinkerbell', groups: ['disney', 'peterPan']},
+            {id: 'peterPan', name: 'Peter Pan', gender:'male', groups: ['disney', 'peterPan']},
+            {id: 'tinkerbell', name: 'Tinkerbell', gender:'female', groups: ['disney', 'peterPan']},
 
 
             // chip and dale
-            {id: 'chip', name: 'Chip', groups: ['disney', 'chipAndDale']},
-            {id: 'dale', name: 'Dale', groups: ['disney', 'chipAndDale']}
+            {id: 'chip', name: 'Chip', gender:'male', groups: ['disney', 'chipAndDale']},
+            {id: 'dale', name: 'Dale', gender:'male', groups: ['disney', 'chipAndDale']}
 
         ],
         groups: [
