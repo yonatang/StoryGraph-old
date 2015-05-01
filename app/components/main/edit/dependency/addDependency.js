@@ -35,6 +35,7 @@
                     ctrl.operators = DependencyObject.operators;
                     ctrl.operator = null;
                     ctrl.depValue = {};
+                    ctrl.extraN = null;
                 };
                 ctrl.cancel = function () {
                     return $modalInstance.dismiss();
@@ -48,6 +49,9 @@
                         var dependency = new DependencyObject(ctrl.sgEvent.id, eventId);
                         dependency.operator = dependency.operators[ctrl.operator.id];
                         $.extend(dependency, ctrl.depValue);
+                        if (dependency.operator.extraN) {
+                            dependency.extraN = ctrl.extraN;
+                        }
                         dependencies.push(dependency);
                     });
                     return $modalInstance.close(dependencies);

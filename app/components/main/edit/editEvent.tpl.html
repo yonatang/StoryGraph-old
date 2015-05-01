@@ -63,7 +63,8 @@
                     <tr ng-repeat="outDep in ctrl.outDeps"
                         ng-if="!outDep.removed">
                         <td>{{outDep.type}} (out)</td>
-                        <td>{{outDep.operator.name}}</td>
+                        <td>{{outDep.operator.name}}{{outDep.operator.extraN ? ' ('+outDep.extraN+')' :
+                            ''}}</td>
                         <td>{{ctrl.getEventName(outDep.toEventId)}}</td>
                         <td>{{outDep.valueNames.join(', ')}}</td>
                         <td><a href
@@ -74,7 +75,8 @@
                     </tr>
                     <tr ng-repeat="outDep in ctrl.uncommittedDeps">
                         <td>{{outDep.type}} (out)</td>
-                        <td>{{outDep.operator.name}}</td>
+                        <td>{{outDep.operator.name}}{{outDep.operator.extraN ? ' ('+outDep.extraN+')' :
+                            ''}}</td>
                         <td>{{ctrl.getEventName(outDep.toEventId)}}</td>
                         <td>{{outDep.valueNames.join(', ')}}</td>
                         <td><a href
@@ -86,7 +88,8 @@
                     <tr ng-repeat="inDep in ctrl.inDeps"
                         ng-if="!inDep.removed">
                         <td>{{inDep.type}} (in)</td>
-                        <td>{{inDep.operator.name}}</td>
+                        <td>{{inDep.operator.name}}{{inDep.operator.extraN ? ' ('+inDep.extraN+')' :
+                            ''}}</td>
                         <td>{{ctrl.getEventName(inDep.fromEventId)}}</td>
                         <td>{{outDep.valueNames.join(', ')}}</td>
                         <td><a href
