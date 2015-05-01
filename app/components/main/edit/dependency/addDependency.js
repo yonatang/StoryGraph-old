@@ -1,4 +1,4 @@
-(function (angular, undefined) {
+(function (angular, $, undefined) {
     'use strict';
 
     angular.module('sg.main')
@@ -14,6 +14,7 @@
                 var DependencyObject = null;
                 ctrl.operators = null;
                 ctrl.operator = null;
+                ctrl.depValue = {};
                 ctrl.changeType = function () {
                     switch (ctrl.type) {
                         case 'who':
@@ -33,6 +34,8 @@
                     }
                     ctrl.operators = DependencyObject.operators;
                     ctrl.operator = null;
+                    ctrl.depValue = {};
+                    ctrl.extraN = null;
                 };
                 ctrl.cancel = function () {
                     return $modalInstance.dismiss();
@@ -45,6 +48,10 @@
                     angular.forEach(ctrl.targetEvents, function (eventId) {
                         var dependency = new DependencyObject(ctrl.sgEvent.id, eventId);
                         dependency.operator = dependency.operators[ctrl.operator.id];
+                        $.extend(dependency, ctrl.depValue);
+                        if (dependency.operator.extraN) {
+                            dependency.extraN = ctrl.extraN;
+                        }
                         dependencies.push(dependency);
                     });
                     return $modalInstance.close(dependencies);
@@ -69,4 +76,4 @@
                 return modalInstance;
             };
         }]);
-})(angular);
+})(angular, jQuery);

@@ -40,6 +40,15 @@
                     required>
             </select>
         </div>
+        <div class="form-group"
+             ng-if="ctrl.operator.extraN">
+            <label>N</label>
+            <input class="form-control"
+                   ng-model="ctrl.extraN"
+                   required>
+        </div>
+        <select-characters container="ctrl.depValue" ng-if="ctrl.type=='who'"/>
+
     </form>
 
 </div>

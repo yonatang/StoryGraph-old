@@ -52,6 +52,7 @@
                         <th>Type</th>
                         <th>Operator</th>
                         <th>Other Event</th>
+                        <th>Editional</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -62,8 +63,10 @@
                     <tr ng-repeat="outDep in ctrl.outDeps"
                         ng-if="!outDep.removed">
                         <td>{{outDep.type}} (out)</td>
-                        <td>{{outDep.operator.name}}</td>
+                        <td>{{outDep.operator.name}}{{outDep.operator.extraN ? ' ('+outDep.extraN+')' :
+                            ''}}</td>
                         <td>{{ctrl.getEventName(outDep.toEventId)}}</td>
+                        <td>{{outDep.valueNames.join(', ')}}</td>
                         <td><a href
                                ng-click="ctrl.removePersistedDependency(outDep)">
                             <span class="glyphicon glyphicon-trash"></span>
@@ -72,8 +75,10 @@
                     </tr>
                     <tr ng-repeat="outDep in ctrl.uncommittedDeps">
                         <td>{{outDep.type}} (out)</td>
-                        <td>{{outDep.operator.name}}</td>
+                        <td>{{outDep.operator.name}}{{outDep.operator.extraN ? ' ('+outDep.extraN+')' :
+                            ''}}</td>
                         <td>{{ctrl.getEventName(outDep.toEventId)}}</td>
+                        <td>{{outDep.valueNames.join(', ')}}</td>
                         <td><a href
                                ng-click="ctrl.removeUncomittedDep(outDep)">
                             <span class="glyphicon glyphicon-trash"></span>
@@ -83,8 +88,10 @@
                     <tr ng-repeat="inDep in ctrl.inDeps"
                         ng-if="!inDep.removed">
                         <td>{{inDep.type}} (in)</td>
-                        <td>{{inDep.operator.name}}</td>
+                        <td>{{inDep.operator.name}}{{inDep.operator.extraN ? ' ('+inDep.extraN+')' :
+                            ''}}</td>
                         <td>{{ctrl.getEventName(inDep.fromEventId)}}</td>
+                        <td>{{outDep.valueNames.join(', ')}}</td>
                         <td><a href
                                ng-click="ctrl.removePersistedDependency(inDep)">
                             <span class="glyphicon glyphicon-trash"></span>
