@@ -190,7 +190,9 @@
                     var node = _graph.node(nodeName);
                     var newNode = new StoryEvent();
                     newNode.mergeWith(node);
-
+                    if (node.id>_id){
+                        _id=node.id;
+                    }
                     //reinstantiate constraints of the node
                     var newConstraints = [];
                     var constraints = [].concat(newNode.constraints);
