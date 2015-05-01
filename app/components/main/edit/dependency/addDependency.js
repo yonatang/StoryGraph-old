@@ -33,6 +33,7 @@
                     }
                     ctrl.operators = DependencyObject.operators;
                     ctrl.operator = null;
+                    ctrl.extraN = null;
                 };
                 ctrl.cancel = function () {
                     return $modalInstance.dismiss();
@@ -45,6 +46,9 @@
                     angular.forEach(ctrl.targetEvents, function (eventId) {
                         var dependency = new DependencyObject(ctrl.sgEvent.id, eventId);
                         dependency.operator = dependency.operators[ctrl.operator.id];
+                        if (dependency.operator.extraN) {
+                            dependency.extraN = ctrl.extraN;
+                        }
                         dependencies.push(dependency);
                     });
                     return $modalInstance.close(dependencies);

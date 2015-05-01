@@ -74,6 +74,7 @@
                     operators: {
                         value: {
                             'include': {id: 'include', name: 'Include'},
+                            'includeN': {id: 'includeN', name: 'Include at least N', extraN: true},
                             'exclude': {id: 'exclude', name: 'Exclude'}
                         }
                     }
