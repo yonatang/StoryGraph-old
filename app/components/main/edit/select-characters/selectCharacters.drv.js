@@ -15,6 +15,9 @@
                 scope.options = scope.profile.characters;
 
                 function selectAllInGroup() {
+                    if (!scope.container.value) {
+                        scope.container.value = [];
+                    }
                     var value = scope.container.value,
                         group = scope.container.group.id;
                     angular.forEach(scope.options, function (option) {
@@ -37,7 +40,7 @@
                 }
 
                 function groupFilter(option) {
-                    if (!scope.container.group){
+                    if (!scope.container.group) {
                         return true;
                     }
                     var group = scope.container.group.id;
