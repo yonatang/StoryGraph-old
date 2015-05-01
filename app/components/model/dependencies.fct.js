@@ -76,6 +76,18 @@
                             'include': {id: 'include', name: 'Include'},
                             'exclude': {id: 'exclude', name: 'Exclude'}
                         }
+                    },
+                    valueNames: {
+                        get: function () {
+                            var arr = [];
+                            if (!this.value) {
+                                return arr;
+                            }
+                            this.value.forEach(function (elem) {
+                                arr.push(elem.name);
+                            });
+                            return arr;
+                        }
                     }
                 });
                 staticEnhencment(CharacterDependency);

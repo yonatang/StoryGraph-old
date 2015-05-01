@@ -29,6 +29,10 @@
 
                         <p class="form-control-static">{{getDependency().toEventId}}</p>
                     </div>
+                    <div class="form-group">
+                        <label class="control-label">More data</label>
+                        <pre>{{getDependency() | json}}</pre>
+                    </div>
 
                 </div>
                 <!--{"fromEventId":2,"toEventId":1,"type":"when","operator":{"id":"decrease","name":"Decrease"},"value":null,"selected":true} -->
