@@ -7,14 +7,8 @@
             },
             restrict: 'E',
             templateUrl: '/components/main/edit/select-characters/selectCharacters.tpl.html',
-            link: function (scope, element /*, attrs*/) {
-                scope.selectAllInGroup = selectAllInGroup;
-                scope.deselectAllInGroup = deselectAllInGroup;
-                scope.groupFilter = groupFilter;
-                scope.profile = storyGraphService.profile;
-                scope.options = scope.profile.characters;
-
-                function selectAllInGroup() {
+            link: function (scope /*, element, attrs*/) {
+                scope.selectAllInGroup = function selectAllInGroup() {
                     if (!scope.container.value) {
                         scope.container.value = [];
                     }
@@ -26,9 +20,8 @@
                             value.push(option);
                         }
                     });
-                }
-
-                function deselectAllInGroup() {
+                };
+                scope.deselectAllInGroup = function deselectAllInGroup() {
                     var value = scope.container.value,
                         group = scope.constraint.group.id;
                     angular.forEach(scope.options, function (option) {
@@ -37,16 +30,18 @@
                             value.splice(idx, 1);
                         }
                     });
-                }
+                };
 
-                function groupFilter(option) {
+                scope.groupFilter = function groupFilter(option) {
                     if (!scope.container.group) {
                         return true;
                     }
                     var group = scope.container.group.id;
                     return (option.groups.indexOf(group) > -1);
-                }
+                };
 
+                scope.profile = storyGraphService.profile;
+                scope.options = scope.profile.characters;
 
             }
         };
