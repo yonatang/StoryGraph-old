@@ -24,4 +24,17 @@
                ng-model="ctrl.constraint.extraN">
     </div>
 </div>
-<select-characters container="ctrl.constraint" />
+<dic class="form-inline">
+    <div class="form-group"
+         ng-if="ctrl.constraint.operator.multiplier">
+        <label>Multiplier
+            <span tooltip="If more than one instance of the same id required">
+                <span class="glyphicon glyphicon-question-sign"></span>
+            </span>
+        </label>
+        <input type="number"
+               class="form-control"
+               ng-model="ctrl.constraint.multiplier">
+    </div>
+</dic>
+<select-characters container="ctrl.constraint"/>

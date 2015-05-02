@@ -4,9 +4,10 @@
         'oneOf': {id: 'oneOf', name: 'Must be one of'},
         'notOneOf': {id: 'notOneOf', name: 'Cannot be one of'}
     };
+    //multiplier - if more than 1 instance of that item is required.
     var multiValueOperator = {
-        'includeAll': {id: 'includeAll', name: 'Must include all of'},
-        'includeN': {id: 'includeN', name: 'Must include N of', extraN: true},
+        'includeAll': {id: 'includeAll', name: 'Must include all of', multiplier:true},
+        'includeN': {id: 'includeN', name: 'Must include N of', extraN: true, multiplier:true},
         'excludeAll': {id: 'excludeAll', name: 'Cannot include all of'}
     };
     angular.module('sg.model')
