@@ -407,6 +407,26 @@
         ]
     };
 
+    var machuPicchuProfile = {
+        'id':'mp',
+        'name':'Machu Picchu',
+        'times':[{id: 'morning', name: 'Morning'},
+            {id: 'afternoon', name: 'Afternoon'},
+            {id: 'night', name: 'Night'}],
+        'locations': [
+            {id: 'mp', name: 'Machu Picchu'},
+            {id: 'cuscם', name: 'Cusco'}
+        ],
+        'characters': [
+            {'id':'travler','name':'Travler','group':'travlers'},
+            {'id':'local','name':'Local Person','group':'locals'}
+        ],
+        'groups':[
+            {'id':'travlers', 'name':'Travlers'},
+            {'id':'locals', 'name':'Locals'}
+        ]
+    };
+
     function Profile(obj) {
         $.extend(true, this, obj);
         this.timesById = arrayToObject(this.times);
@@ -425,6 +445,7 @@
     }
 
     angular.module('sg.model').constant('sg.profiles', [
+        new Profile(machuPicchuProfile),
         new Profile(zooProfile),
         new Profile(disneyProfile)
     ]);
