@@ -415,7 +415,7 @@
             {id: 'night', name: 'Night'}],
         'locations': [
             {id: 'mp', name: 'Machu Picchu'},
-            {id: 'cuscם', name: 'Cusco'}
+            {id: 'cusco', name: 'Cusco'}
         ],
         'characters': [
             {'id':'travler','name':'Travler','group':'travlers'},
