@@ -445,8 +445,10 @@
     }
 
     angular.module('sg.model').constant('sg.profiles', [
+
+        new Profile(disneyProfile),
         new Profile(machuPicchuProfile),
-        new Profile(zooProfile),
-        new Profile(disneyProfile)
+        new Profile(zooProfile)
+
     ]);
 })(angular, jQuery);
